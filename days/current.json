@@ -6,14 +6,54 @@
     "display": "Emile Heskey",
     "wikipedia_title": "Emile Heskey",
     "clubs": [
-      "Leicester City",
-      "Liverpool",
-      "Birmingham City",
-      "Wigan Athletic",
-      "Aston Villa",
-      "Newcastle United",
-      "Bolton Wanderers",
-      "Melbourne City"
+      {
+        "name": "Leicester City",
+        "years": "1995–00",
+        "apps": 197,
+        "goals": 40
+      },
+      {
+        "name": "Liverpool",
+        "years": "2000–04",
+        "apps": 223,
+        "goals": 39
+      },
+      {
+        "name": "Birmingham City",
+        "years": "2004–06",
+        "apps": 90,
+        "goals": 14
+      },
+      {
+        "name": "Wigan Athletic",
+        "years": "2006–09",
+        "apps": 84,
+        "goals": 22
+      },
+      {
+        "name": "Aston Villa",
+        "years": "2009–12",
+        "apps": 84,
+        "goals": 11
+      },
+      {
+        "name": "Newcastle United",
+        "years": "2012–13",
+        "apps": 11,
+        "goals": 0
+      },
+      {
+        "name": "Bolton Wanderers",
+        "years": "2013–14",
+        "apps": 20,
+        "goals": 3
+      },
+      {
+        "name": "Melbourne City",
+        "years": "2014–15",
+        "apps": 5,
+        "goals": 0
+      }
     ]
   },
   "starting11": {

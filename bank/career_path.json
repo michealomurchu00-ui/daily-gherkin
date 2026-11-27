@@ -9,16 +9,16 @@
       "display": "Zlatan Ibrahimović",
       "wikipedia_title": "Zlatan Ibrahimović",
       "clubs": [
-        {"name": "Malmö FF",           "apps": 40,  "goals": 16},
-        {"name": "Ajax",               "apps": 74,  "goals": 35},
-        {"name": "Juventus",           "apps": 70,  "goals": 23},
-        {"name": "Inter Milan",        "apps": 88,  "goals": 57},
-        {"name": "Barcelona",          "apps": 29,  "goals": 16},
-        {"name": "AC Milan",           "apps": 61,  "goals": 42},
-        {"name": "Paris Saint-Germain","apps": 122, "goals": 113},
-        {"name": "Manchester United",  "apps": 33,  "goals": 17},
-        {"name": "LA Galaxy",          "apps": 52,  "goals": 52},
-        {"name": "AC Milan",           "apps": 53,  "goals": 28}
+        {"name": "Malmö FF",           "years": "1999–01", "apps": 40,  "goals": 16},
+        {"name": "Ajax",               "years": "2001–04", "apps": 74,  "goals": 35},
+        {"name": "Juventus",           "years": "2004–06", "apps": 70,  "goals": 23},
+        {"name": "Inter Milan",        "years": "2006–09", "apps": 88,  "goals": 57},
+        {"name": "Barcelona",          "years": "2009–10", "apps": 29,  "goals": 16},
+        {"name": "AC Milan",           "years": "2010–12", "apps": 61,  "goals": 42},
+        {"name": "Paris Saint-Germain","years": "2012–16", "apps": 122, "goals": 113},
+        {"name": "Manchester United",  "years": "2016–18", "apps": 33,  "goals": 17},
+        {"name": "LA Galaxy",          "years": "2018–19", "apps": 52,  "goals": 52},
+        {"name": "AC Milan",           "years": "2020–23", "apps": 53,  "goals": 28}
       ]
     },
     {
@@ -27,15 +27,15 @@
       "display": "Didier Drogba",
       "wikipedia_title": "Didier Drogba",
       "clubs": [
-        {"name": "Le Mans",          "apps": 45, "goals": 7},
-        {"name": "Gueugnon",         "apps": 45, "goals": 14},
-        {"name": "Marseille",        "apps": 88, "goals": 32},
-        {"name": "Chelsea",          "apps": 254,"goals": 100},
-        {"name": "Shanghai Shenhua","apps": 11, "goals": 8},
-        {"name": "Galatasaray",      "apps": 22, "goals": 9},
-        {"name": "Chelsea",          "apps": 18, "goals": 4},
-        {"name": "Montréal Impact",  "apps": 11, "goals": 5},
-        {"name": "Phoenix Rising",   "apps": 10, "goals": 5}
+        {"name": "Le Mans",          "years": "1998–02", "apps": 45, "goals": 7},
+        {"name": "Gueugnon",         "years": "2002–03", "apps": 45, "goals": 14},
+        {"name": "Marseille",        "years": "2003–04", "apps": 88, "goals": 32},
+        {"name": "Chelsea",          "years": "2004–12", "apps": 254,"goals": 100},
+        {"name": "Shanghai Shenhua", "years": "2012",    "apps": 11, "goals": 8},
+        {"name": "Galatasaray",      "years": "2012–13", "apps": 22, "goals": 9},
+        {"name": "Chelsea",          "years": "2014–15", "apps": 18, "goals": 4},
+        {"name": "Montréal Impact",  "years": "2015",    "apps": 11, "goals": 5},
+        {"name": "Phoenix Rising",   "years": "2017",    "apps": 10, "goals": 5}
       ]
     },
     {
@@ -44,16 +44,16 @@
       "display": "Samuel Eto'o",
       "wikipedia_title": "Samuel Eto'o",
       "clubs": [
-        {"name": "Real Madrid",         "apps": 0,   "goals": 0},
-        {"name": "Leganés",             "apps": 19,  "goals": 4},
-        {"name": "Mallorca",            "apps": 103, "goals": 54},
-        {"name": "Barcelona",           "apps": 145, "goals": 108},
-        {"name": "Inter Milan",         "apps": 88,  "goals": 53},
-        {"name": "Anzhi Makhachkala",   "apps": 65,  "goals": 32},
-        {"name": "Chelsea",             "apps": 19,  "goals": 9},
-        {"name": "Everton",             "apps": 12,  "goals": 2},
-        {"name": "Sampdoria",           "apps": 12,  "goals": 5},
-        {"name": "Antalyaspor",         "apps": 27,  "goals": 15}
+        {"name": "Real Madrid",         "years": "1997",    "apps": 0,   "goals": 0},
+        {"name": "Leganés",             "years": "1997–98", "apps": 19,  "goals": 4},
+        {"name": "Mallorca",            "years": "1999–04", "apps": 103, "goals": 54},
+        {"name": "Barcelona",           "years": "2004–09", "apps": 145, "goals": 108},
+        {"name": "Inter Milan",         "years": "2009–11", "apps": 88,  "goals": 53},
+        {"name": "Anzhi Makhachkala",   "years": "2011–13", "apps": 65,  "goals": 32},
+        {"name": "Chelsea",             "years": "2013–14", "apps": 19,  "goals": 9},
+        {"name": "Everton",             "years": "2014",    "apps": 12,  "goals": 2},
+        {"name": "Sampdoria",           "years": "2014–15", "apps": 12,  "goals": 5},
+        {"name": "Antalyaspor",         "years": "2015–17", "apps": 27,  "goals": 15}
       ]
     },
     {
@@ -62,12 +62,12 @@
       "display": "Fernando Torres",
       "wikipedia_title": "Fernando Torres",
       "clubs": [
-        {"name": "Atlético Madrid", "apps": 174, "goals": 75},
-        {"name": "Liverpool",       "apps": 102, "goals": 65},
-        {"name": "Chelsea",         "apps": 110, "goals": 20},
-        {"name": "AC Milan",        "apps": 10,  "goals": 1},
-        {"name": "Atlético Madrid", "apps": 43,  "goals": 15},
-        {"name": "Sagan Tosu",      "apps": 22,  "goals": 5}
+        {"name": "Atlético Madrid", "years": "2001–07", "apps": 174, "goals": 75},
+        {"name": "Liverpool",       "years": "2007–11", "apps": 102, "goals": 65},
+        {"name": "Chelsea",         "years": "2011–15", "apps": 110, "goals": 20},
+        {"name": "AC Milan",        "years": "2014–15", "apps": 10,  "goals": 1},
+        {"name": "Atlético Madrid", "years": "2015–17", "apps": 43,  "goals": 15},
+        {"name": "Sagan Tosu",      "years": "2018",    "apps": 22,  "goals": 5}
       ]
     },
     {
@@ -76,14 +76,14 @@
       "display": "David Villa",
       "wikipedia_title": "David Villa",
       "clubs": [
-        {"name": "Sporting Gijón",    "apps": 28,  "goals": 10},
-        {"name": "Real Zaragoza",     "apps": 61,  "goals": 41},
-        {"name": "Valencia",          "apps": 166, "goals": 107},
-        {"name": "Barcelona",         "apps": 87,  "goals": 48},
-        {"name": "Atlético Madrid",   "apps": 60,  "goals": 27},
-        {"name": "New York City FC",  "apps": 124, "goals": 80},
-        {"name": "Melbourne City",    "apps": 8,   "goals": 4},
-        {"name": "Vissel Kobe",       "apps": 19,  "goals": 6}
+        {"name": "Sporting Gijón",    "years": "2000–03", "apps": 28,  "goals": 10},
+        {"name": "Real Zaragoza",     "years": "2003–05", "apps": 61,  "goals": 41},
+        {"name": "Valencia",          "years": "2005–10", "apps": 166, "goals": 107},
+        {"name": "Barcelona",         "years": "2010–13", "apps": 87,  "goals": 48},
+        {"name": "Atlético Madrid",   "years": "2013–14", "apps": 60,  "goals": 27},
+        {"name": "New York City FC",  "years": "2015–18", "apps": 124, "goals": 80},
+        {"name": "Melbourne City",    "years": "2019",    "apps": 8,   "goals": 4},
+        {"name": "Vissel Kobe",       "years": "2019",    "apps": 19,  "goals": 6}
       ]
     },
     {
@@ -92,11 +92,11 @@
       "display": "Andriy Shevchenko",
       "wikipedia_title": "Andriy Shevchenko",
       "clubs": [
-        {"name": "Dynamo Kyiv", "apps": 176, "goals": 121},
-        {"name": "AC Milan",    "apps": 173, "goals": 127},
-        {"name": "Chelsea",     "apps": 77,  "goals": 9},
-        {"name": "AC Milan",    "apps": 56,  "goals": 26},
-        {"name": "Dynamo Kyiv", "apps": 55,  "goals": 22}
+        {"name": "Dynamo Kyiv", "years": "1994–99", "apps": 176, "goals": 121},
+        {"name": "AC Milan",    "years": "1999–06", "apps": 173, "goals": 127},
+        {"name": "Chelsea",     "years": "2006–09", "apps": 77,  "goals": 9},
+        {"name": "AC Milan",    "years": "2008–09", "apps": 56,  "goals": 26},
+        {"name": "Dynamo Kyiv", "years": "2009–12", "apps": 55,  "goals": 22}
       ]
     },
     {
@@ -105,13 +105,13 @@
       "display": "Patrick Vieira",
       "wikipedia_title": "Patrick Vieira",
       "clubs": [
-        {"name": "Cannes",           "apps": 10,  "goals": 0},
-        {"name": "AC Milan",         "apps": 2,   "goals": 0},
-        {"name": "Arsenal",          "apps": 279, "goals": 33},
-        {"name": "Juventus",         "apps": 55,  "goals": 4},
-        {"name": "Inter Milan",      "apps": 89,  "goals": 9},
-        {"name": "Manchester City",  "apps": 100, "goals": 5},
-        {"name": "New York Red Bulls","apps": 100, "goals": 6}
+        {"name": "Cannes",            "years": "1993–95", "apps": 10,  "goals": 0},
+        {"name": "AC Milan",          "years": "1995–96", "apps": 2,   "goals": 0},
+        {"name": "Arsenal",           "years": "1996–05", "apps": 279, "goals": 33},
+        {"name": "Juventus",          "years": "2005–06", "apps": 55,  "goals": 4},
+        {"name": "Inter Milan",       "years": "2006–10", "apps": 89,  "goals": 9},
+        {"name": "Manchester City",   "years": "2010–11", "apps": 100, "goals": 5},
+        {"name": "New York Red Bulls","years": "2010–11", "apps": 100, "goals": 6}
       ]
     },
     {
@@ -120,12 +120,12 @@
       "display": "Claude Makélélé",
       "wikipedia_title": "Claude Makélélé",
       "clubs": [
-        {"name": "Nantes",             "apps": 84,  "goals": 4},
-        {"name": "Marseille",          "apps": 60,  "goals": 2},
-        {"name": "Celta Vigo",         "apps": 37,  "goals": 0},
-        {"name": "Real Madrid",        "apps": 107, "goals": 0},
-        {"name": "Chelsea",            "apps": 144, "goals": 0},
-        {"name": "Paris Saint-Germain","apps": 84,  "goals": 1}
+        {"name": "Nantes",             "years": "1992–97", "apps": 84,  "goals": 4},
+        {"name": "Marseille",          "years": "1997–98", "apps": 60,  "goals": 2},
+        {"name": "Celta Vigo",         "years": "1998–00", "apps": 37,  "goals": 0},
+        {"name": "Real Madrid",        "years": "2000–03", "apps": 107, "goals": 0},
+        {"name": "Chelsea",            "years": "2003–08", "apps": 144, "goals": 0},
+        {"name": "Paris Saint-Germain","years": "2008–11", "apps": 84,  "goals": 1}
       ]
     },
     {
@@ -134,13 +134,13 @@
       "display": "Robinho",
       "wikipedia_title": "Robinho",
       "clubs": [
-        {"name": "Santos",          "apps": 100, "goals": 68},
-        {"name": "Real Madrid",     "apps": 97,  "goals": 35},
-        {"name": "Manchester City", "apps": 41,  "goals": 14},
-        {"name": "AC Milan",        "apps": 87,  "goals": 25},
-        {"name": "Santos",          "apps": 43,  "goals": 14},
-        {"name": "Atlético Mineiro","apps": 30,  "goals": 13},
-        {"name": "Sivasspor",       "apps": 38,  "goals": 13}
+        {"name": "Santos",          "years": "2002–05", "apps": 100, "goals": 68},
+        {"name": "Real Madrid",     "years": "2005–08", "apps": 97,  "goals": 35},
+        {"name": "Manchester City", "years": "2008–10", "apps": 41,  "goals": 14},
+        {"name": "AC Milan",        "years": "2010–14", "apps": 87,  "goals": 25},
+        {"name": "Santos",          "years": "2014–15", "apps": 43,  "goals": 14},
+        {"name": "Atlético Mineiro","years": "2015–16", "apps": 30,  "goals": 13},
+        {"name": "Sivasspor",       "years": "2017–18", "apps": 38,  "goals": 13}
       ]
     },
     {
@@ -149,16 +149,16 @@
       "display": "Hernán Crespo",
       "wikipedia_title": "Hernán Crespo",
       "clubs": [
-        {"name": "River Plate", "apps": 91,  "goals": 55},
-        {"name": "Parma",       "apps": 100, "goals": 62},
-        {"name": "Lazio",       "apps": 58,  "goals": 42},
-        {"name": "Inter Milan", "apps": 40,  "goals": 26},
-        {"name": "Chelsea",     "apps": 19,  "goals": 10},
-        {"name": "AC Milan",    "apps": 56,  "goals": 39},
-        {"name": "Inter Milan", "apps": 78,  "goals": 43},
-        {"name": "Chelsea",     "apps": 13,  "goals": 5},
-        {"name": "Genoa",       "apps": 11,  "goals": 4},
-        {"name": "Parma",       "apps": 14,  "goals": 4}
+        {"name": "River Plate", "years": "1993–96", "apps": 91,  "goals": 55},
+        {"name": "Parma",       "years": "1996–00", "apps": 100, "goals": 62},
+        {"name": "Lazio",       "years": "2000–02", "apps": 58,  "goals": 42},
+        {"name": "Inter Milan", "years": "2002–03", "apps": 40,  "goals": 26},
+        {"name": "Chelsea",     "years": "2003–04", "apps": 19,  "goals": 10},
+        {"name": "AC Milan",    "years": "2004–06", "apps": 56,  "goals": 39},
+        {"name": "Inter Milan", "years": "2006–08", "apps": 78,  "goals": 43},
+        {"name": "Chelsea",     "years": "2008–09", "apps": 13,  "goals": 5},
+        {"name": "Genoa",       "years": "2009",    "apps": 11,  "goals": 4},
+        {"name": "Parma",       "years": "2009–11", "apps": 14,  "goals": 4}
       ]
     },
     {
@@ -167,15 +167,15 @@
       "display": "Juan Sebastián Verón",
       "wikipedia_title": "Juan Sebastián Verón",
       "clubs": [
-        {"name": "Estudiantes",      "apps": 41,  "goals": 5},
-        {"name": "Boca Juniors",     "apps": 25,  "goals": 5},
-        {"name": "Sampdoria",        "apps": 36,  "goals": 8},
-        {"name": "Parma",            "apps": 60,  "goals": 12},
-        {"name": "Lazio",            "apps": 73,  "goals": 25},
-        {"name": "Manchester United","apps": 51,  "goals": 11},
-        {"name": "Chelsea",          "apps": 14,  "goals": 5},
-        {"name": "Inter Milan",      "apps": 60,  "goals": 14},
-        {"name": "Estudiantes",      "apps": 103, "goals": 16}
+        {"name": "Estudiantes",      "years": "1992–96", "apps": 41,  "goals": 5},
+        {"name": "Boca Juniors",     "years": "1996–97", "apps": 25,  "goals": 5},
+        {"name": "Sampdoria",        "years": "1997–98", "apps": 36,  "goals": 8},
+        {"name": "Parma",            "years": "1998–99", "apps": 60,  "goals": 12},
+        {"name": "Lazio",            "years": "1999–01", "apps": 73,  "goals": 25},
+        {"name": "Manchester United","years": "2001–03", "apps": 51,  "goals": 11},
+        {"name": "Chelsea",          "years": "2003–04", "apps": 14,  "goals": 5},
+        {"name": "Inter Milan",      "years": "2004–06", "apps": 60,  "goals": 14},
+        {"name": "Estudiantes",      "years": "2006–14", "apps": 103, "goals": 16}
       ]
     },
     {
@@ -184,14 +184,14 @@
       "display": "Emile Heskey",
       "wikipedia_title": "Emile Heskey",
       "clubs": [
-        {"name": "Leicester City",   "apps": 197, "goals": 40},
-        {"name": "Liverpool",        "apps": 223, "goals": 39},
-        {"name": "Birmingham City",  "apps": 90,  "goals": 14},
-        {"name": "Wigan Athletic",   "apps": 84,  "goals": 22},
-        {"name": "Aston Villa",      "apps": 84,  "goals": 11},
-        {"name": "Newcastle United", "apps": 11,  "goals": 0},
-        {"name": "Bolton Wanderers", "apps": 20,  "goals": 3},
-        {"name": "Melbourne City",   "apps": 5,   "goals": 0}
+        {"name": "Leicester City",   "years": "1995–00", "apps": 197, "goals": 40},
+        {"name": "Liverpool",        "years": "2000–04", "apps": 223, "goals": 39},
+        {"name": "Birmingham City",  "years": "2004–06", "apps": 90,  "goals": 14},
+        {"name": "Wigan Athletic",   "years": "2006–09", "apps": 84,  "goals": 22},
+        {"name": "Aston Villa",      "years": "2009–12", "apps": 84,  "goals": 11},
+        {"name": "Newcastle United", "years": "2012–13", "apps": 11,  "goals": 0},
+        {"name": "Bolton Wanderers", "years": "2013–14", "apps": 20,  "goals": 3},
+        {"name": "Melbourne City",   "years": "2014–15", "apps": 5,   "goals": 0}
       ]
     },
     {
@@ -200,13 +200,13 @@
       "display": "Jay-Jay Okocha",
       "wikipedia_title": "Austin Okocha",
       "clubs": [
-        {"name": "Enugu Rangers",    "apps": 38,  "goals": 8},
-        {"name": "Borussia Frankfurt","apps": 68, "goals": 18},
-        {"name": "Fenerbahçe",       "apps": 53,  "goals": 15},
-        {"name": "Paris Saint-Germain","apps": 142,"goals": 27},
-        {"name": "Bolton Wanderers", "apps": 99,  "goals": 14},
-        {"name": "Hull City",        "apps": 12,  "goals": 0},
-        {"name": "Al-Ahli Doha",     "apps": 10,  "goals": 2}
+        {"name": "Enugu Rangers",      "years": "1990–93", "apps": 38,  "goals": 8},
+        {"name": "Borussia Frankfurt", "years": "1993–96", "apps": 68,  "goals": 18},
+        {"name": "Fenerbahçe",         "years": "1996–98", "apps": 53,  "goals": 15},
+        {"name": "Paris Saint-Germain","years": "1998–02", "apps": 142, "goals": 27},
+        {"name": "Bolton Wanderers",   "years": "2002–06", "apps": 99,  "goals": 14},
+        {"name": "Hull City",          "years": "2006–07", "apps": 12,  "goals": 0},
+        {"name": "Al-Ahli Doha",       "years": "2007–08", "apps": 10,  "goals": 2}
       ]
     },
     {
@@ -215,11 +215,11 @@
       "display": "Michael Owen",
       "wikipedia_title": "Michael Owen",
       "clubs": [
-        {"name": "Liverpool",        "apps": 297, "goals": 158},
-        {"name": "Real Madrid",      "apps": 36,  "goals": 13},
-        {"name": "Newcastle United", "apps": 71,  "goals": 26},
-        {"name": "Manchester United","apps": 52,  "goals": 17},
-        {"name": "Stoke City",       "apps": 31,  "goals": 4}
+        {"name": "Liverpool",        "years": "1996–04", "apps": 297, "goals": 158},
+        {"name": "Real Madrid",      "years": "2004–05", "apps": 36,  "goals": 13},
+        {"name": "Newcastle United", "years": "2005–09", "apps": 71,  "goals": 26},
+        {"name": "Manchester United","years": "2009–12", "apps": 52,  "goals": 17},
+        {"name": "Stoke City",       "years": "2012–13", "apps": 31,  "goals": 4}
       ]
     },
     {
@@ -228,12 +228,12 @@
       "display": "Shaun Wright-Phillips",
       "wikipedia_title": "Shaun Wright-Phillips",
       "clubs": [
-        {"name": "Manchester City",    "apps": 93, "goals": 18},
-        {"name": "Chelsea",            "apps": 83, "goals": 14},
-        {"name": "Manchester City",    "apps": 91, "goals": 16},
-        {"name": "Queens Park Rangers","apps": 68, "goals": 8},
-        {"name": "Bursaspor",          "apps": 8,  "goals": 0},
-        {"name": "New York Red Bulls", "apps": 25, "goals": 2}
+        {"name": "Manchester City",    "years": "2000–05", "apps": 93, "goals": 18},
+        {"name": "Chelsea",            "years": "2005–08", "apps": 83, "goals": 14},
+        {"name": "Manchester City",    "years": "2008–11", "apps": 91, "goals": 16},
+        {"name": "Queens Park Rangers","years": "2011–14", "apps": 68, "goals": 8},
+        {"name": "Bursaspor",          "years": "2014",    "apps": 8,  "goals": 0},
+        {"name": "New York Red Bulls", "years": "2015–16", "apps": 25, "goals": 2}
       ]
     }
   ]
