@@ -337,9 +337,11 @@ async function init() {
       document.getElementById("auth-gate").hidden = false;
       document.getElementById("auth-email").value = session.user.email || "";
       document.getElementById("auth-email").disabled = true;
+      document.getElementById("auth-email").hidden = true;
       document.getElementById("auth-gate").querySelector(".round-label").textContent = "One more thing…";
       document.getElementById("auth-gate").querySelector("p").textContent =
-        "You're signed in! Just enter a display name for the leaderboard.";
+        "You're signed in! Just pick a display name for the leaderboard.";
+      document.querySelector("#auth-gate .btn-primary").textContent = "Let's go →";
     } else {
       await startGame();
     }
