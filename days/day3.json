@@ -1,0 +1,105 @@
+{
+  "day": 3,
+  "date": "2026-11-27",
+  "career": {
+    "answer": "villa",
+    "display": "David Villa",
+    "wikipedia_title": "David Villa",
+    "clubs": [
+      {
+        "name": "Sporting Gijón",
+        "years": "2000–03",
+        "apps": 28,
+        "goals": 10
+      },
+      {
+        "name": "Real Zaragoza",
+        "years": "2003–05",
+        "apps": 61,
+        "goals": 41
+      },
+      {
+        "name": "Valencia",
+        "years": "2005–10",
+        "apps": 166,
+        "goals": 107
+      },
+      {
+        "name": "Barcelona",
+        "years": "2010–13",
+        "apps": 87,
+        "goals": 48
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2013–14",
+        "apps": 60,
+        "goals": 27
+      },
+      {
+        "name": "New York City FC",
+        "years": "2015–18",
+        "apps": 124,
+        "goals": 80
+      },
+      {
+        "name": "Melbourne City",
+        "years": "2019",
+        "apps": 8,
+        "goals": 4
+      },
+      {
+        "name": "Vissel Kobe",
+        "years": "2019",
+        "apps": 19,
+        "goals": 6
+      }
+    ]
+  },
+  "starting11": {
+    "answer": "yaya_toure",
+    "display": "Yaya Touré",
+    "match": {
+      "home": "Barcelona",
+      "away": "Manchester United",
+      "competition": "UEFA Champions League Final",
+      "venue": "Stadio Olimpico, Rome",
+      "date": "27 May 2009",
+      "wikipedia_title": "2009 UEFA Champions League Final"
+    },
+    "lineup_hint": "Barcelona: Valdés; Alves, Piqué, Touré, Abidal; Busquets, Xavi, Iniesta; Messi, Eto'o, Henry"
+  },
+  "earworm": {
+    "display": "Under the Bridge — Red Hot Chili Peppers",
+    "preview_url": "days/earworm.mp3",
+    "deezer_id": 785176
+  },
+  "guess_the_year": {
+    "answer": 2010,
+    "clues": [
+      "A devastating earthquake killed over 200,000 people in Haiti",
+      "33 miners were rescued after spending 69 days trapped underground in Chile",
+      "Apple launched the iPad, creating a whole new product category",
+      "An oil rig explosion caused the largest accidental marine oil spill in history",
+      "Spain won their first FIFA World Cup, sealed with the latest goal in final history"
+    ]
+  },
+  "pin_the_pickle": {
+    "question": "Where the world's most famous wildlife presenter was killed by a stingray",
+    "location_name": "Batt Reef, near Port Douglas, Queensland, Australia",
+    "lat": -16.0828,
+    "lng": 145.64
+  },
+  "filmography": {
+    "answer": "julia_roberts",
+    "display": "Julia Roberts",
+    "films": [
+      "Mystic Pizza",
+      "Hook",
+      "My Best Friend's Wedding",
+      "Notting Hill",
+      "Erin Brockovich",
+      "Pretty Woman"
+    ]
+  }
+}

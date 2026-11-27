@@ -1,105 +1,105 @@
 {
-  "day": 2,
+  "day": 3,
   "date": "2026-11-27",
   "career": {
-    "answer": "heskey",
-    "display": "Emile Heskey",
-    "wikipedia_title": "Emile Heskey",
+    "answer": "villa",
+    "display": "David Villa",
+    "wikipedia_title": "David Villa",
     "clubs": [
       {
-        "name": "Leicester City",
-        "years": "1995–00",
-        "apps": 197,
-        "goals": 40
+        "name": "Sporting Gijón",
+        "years": "2000–03",
+        "apps": 28,
+        "goals": 10
       },
       {
-        "name": "Liverpool",
-        "years": "2000–04",
-        "apps": 223,
-        "goals": 39
+        "name": "Real Zaragoza",
+        "years": "2003–05",
+        "apps": 61,
+        "goals": 41
       },
       {
-        "name": "Birmingham City",
-        "years": "2004–06",
-        "apps": 90,
-        "goals": 14
+        "name": "Valencia",
+        "years": "2005–10",
+        "apps": 166,
+        "goals": 107
       },
       {
-        "name": "Wigan Athletic",
-        "years": "2006–09",
-        "apps": 84,
-        "goals": 22
+        "name": "Barcelona",
+        "years": "2010–13",
+        "apps": 87,
+        "goals": 48
       },
       {
-        "name": "Aston Villa",
-        "years": "2009–12",
-        "apps": 84,
-        "goals": 11
-      },
-      {
-        "name": "Newcastle United",
-        "years": "2012–13",
-        "apps": 11,
-        "goals": 0
-      },
-      {
-        "name": "Bolton Wanderers",
+        "name": "Atlético Madrid",
         "years": "2013–14",
-        "apps": 20,
-        "goals": 3
+        "apps": 60,
+        "goals": 27
+      },
+      {
+        "name": "New York City FC",
+        "years": "2015–18",
+        "apps": 124,
+        "goals": 80
       },
       {
         "name": "Melbourne City",
-        "years": "2014–15",
-        "apps": 5,
-        "goals": 0
+        "years": "2019",
+        "apps": 8,
+        "goals": 4
+      },
+      {
+        "name": "Vissel Kobe",
+        "years": "2019",
+        "apps": 19,
+        "goals": 6
       }
     ]
   },
   "starting11": {
-    "answer": "juanfran",
-    "display": "Juanfran",
+    "answer": "yaya_toure",
+    "display": "Yaya Touré",
     "match": {
-      "home": "Real Madrid",
-      "away": "Atlético Madrid",
+      "home": "Barcelona",
+      "away": "Manchester United",
       "competition": "UEFA Champions League Final",
-      "venue": "Estadio da Luz, Lisbon",
-      "date": "24 May 2014",
-      "wikipedia_title": "2014 UEFA Champions League Final"
+      "venue": "Stadio Olimpico, Rome",
+      "date": "27 May 2009",
+      "wikipedia_title": "2009 UEFA Champions League Final"
     },
-    "lineup_hint": "Atlético: Courtois; Juanfran, Godín, Miranda, Filipe Luís; Tiago, Gabi; Arda Turan, Koke, Raúl García; Diego Costa"
+    "lineup_hint": "Barcelona: Valdés; Alves, Piqué, Touré, Abidal; Busquets, Xavi, Iniesta; Messi, Eto'o, Henry"
   },
   "earworm": {
-    "display": "Sweet Child O' Mine — Guns N' Roses",
+    "display": "Under the Bridge — Red Hot Chili Peppers",
     "preview_url": "days/earworm.mp3",
-    "deezer_id": 518458172
+    "deezer_id": 785176
   },
   "guess_the_year": {
-    "answer": 2003,
+    "answer": 2010,
     "clues": [
-      "Seven astronauts were killed when Space Shuttle Columbia broke apart during re-entry",
-      "The world's most iconic supersonic passenger jet, Concorde, made its final commercial flight",
-      "A new respiratory illness, SARS, spread from Asia and caused global panic",
-      "Coalition forces invaded Iraq on the basis of weapons of mass destruction",
-      "Roman Abramovich bought Chelsea and changed English football forever"
+      "A devastating earthquake killed over 200,000 people in Haiti",
+      "33 miners were rescued after spending 69 days trapped underground in Chile",
+      "Apple launched the iPad, creating a whole new product category",
+      "An oil rig explosion caused the largest accidental marine oil spill in history",
+      "Spain won their first FIFA World Cup, sealed with the latest goal in final history"
     ]
   },
   "pin_the_pickle": {
-    "question": "Where Bob Marley was born in a tiny village in the hills",
-    "location_name": "Nine Mile, Saint Ann Parish, Jamaica",
-    "lat": 18.3384,
-    "lng": -77.1657
+    "question": "Where the world's most famous wildlife presenter was killed by a stingray",
+    "location_name": "Batt Reef, near Port Douglas, Queensland, Australia",
+    "lat": -16.0828,
+    "lng": 145.64
   },
   "filmography": {
-    "answer": "emily_blunt",
-    "display": "Emily Blunt",
+    "answer": "julia_roberts",
+    "display": "Julia Roberts",
     "films": [
-      "Mary Poppins Returns",
-      "Oppenheimer",
-      "Sicario",
-      "Edge of Tomorrow",
-      "The Devil Wears Prada",
-      "A Quiet Place"
+      "Mystic Pizza",
+      "Hook",
+      "My Best Friend's Wedding",
+      "Notting Hill",
+      "Erin Brockovich",
+      "Pretty Woman"
     ]
   }
 }
