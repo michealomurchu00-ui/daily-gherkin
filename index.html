@@ -144,6 +144,30 @@ h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
 .progress .dot.done { background: var(--accent); }
 .progress .dot.active { background: var(--accent); opacity: .5; }
 
+/* Timer */
+.timer-row { display: flex; justify-content: flex-end; align-items: center; gap: 6px; margin-bottom: 6px; }
+.timer-num { font-size: 0.8rem; font-weight: 600; color: var(--fg2); min-width: 24px; text-align: right; }
+.timer-num.urgent { color: var(--danger); }
+.timer-bar { flex: 1; height: 3px; background: var(--border); border-radius: 2px; }
+.timer-bar-fill { height: 100%; border-radius: 2px; background: var(--accent); transition: width 1s linear; }
+.timer-bar-fill.urgent { background: var(--danger); }
+
+/* Team sheet */
+.team-sheet { background: #2d7a4f; border-radius: 8px; padding: 12px 8px; margin-bottom: 12px; }
+.team-sheet-row { display: flex; justify-content: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+.player-chip { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px; padding: 4px 10px; color: #fff; font-size: 0.75rem; white-space: nowrap; }
+.player-chip.missing { background: rgba(192,57,43,0.8); border-color: #e74c3c; font-weight: 700;
+  letter-spacing: 0.05em; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* Career stats */
+.clubs-list li { display: flex; justify-content: space-between; align-items: center; }
+.club-stats { font-size: 0.72rem; color: var(--fg2); font-family: monospace; white-space: nowrap; margin-left: 8px; }
+
+/* Leaderboard button in header */
+.header-lb-btn { margin-top: 8px; }
+
 [hidden] { display: none !important; }
 </style>
 </head>
@@ -153,6 +177,9 @@ h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
   <div class="header">
     <h1>🥒 Daily Gherkin</h1>
     <p id="date-label"></p>
+    <div class="header-lb-btn" id="header-lb-wrap" hidden>
+      <button class="btn btn-secondary" style="font-size:.8rem;padding:6px 14px" onclick="openLeaderboard()">📊 Leaderboard</button>
+    </div>
   </div>
 
   <!-- Sign-in gate -->
@@ -282,15 +309,27 @@ async function init() {
     document.getElementById("already-played").hidden = false;
     document.getElementById("already-score").innerHTML =
       `<div style="font-family:'Space Grotesk',sans-serif;font-size:2.5rem;color:var(--accent)">${data.score}</div>
-       <div style="color:var(--fg2);font-size:.85rem">your score today</div>`;
+       <div style="color:var(--fg2);font-size:.85rem">your score today</div>
+       <button class="btn btn-secondary" style="margin-top:16px" onclick="openLeaderboard()">📊 See Leaderboard</button>`;
+    document.getElementById("header-lb-wrap").hidden = false;
     return;
   }
 
   // Check for existing Supabase session (handles magic link callback from URL hash)
   const { data: { session } } = await sb.auth.getSession();
   if (session) {
-    // Logged in — proceed straight to game
-    await startGame();
+    // Logged in — if we don't have a display name yet (e.g. magic link opened on different device), ask for it
+    const storedName = (() => { try { return localStorage.getItem("gherkin_display_name") || ""; } catch { return ""; } })();
+    if (!storedName) {
+      document.getElementById("auth-gate").hidden = false;
+      document.getElementById("auth-email").value = session.user.email || "";
+      document.getElementById("auth-email").disabled = true;
+      document.getElementById("auth-gate").querySelector(".round-label").textContent = "One more thing…";
+      document.getElementById("auth-gate").querySelector("p").textContent =
+        "You're signed in! Just enter a display name for the leaderboard.";
+    } else {
+      await startGame();
+    }
   } else {
     // Not logged in — show auth gate
     document.getElementById("auth-gate").hidden = false;
@@ -311,6 +350,7 @@ async function startGame() {
   }
   buildProgressDots();
   document.getElementById("game").hidden = false;
+  document.getElementById("header-lb-wrap").hidden = false;
   renderRound(0);
 }
 
@@ -323,10 +363,15 @@ async function sendMagicLink() {
   const errEl = document.getElementById("auth-error");
 
   if (!name) { errEl.textContent = "Please enter a display name."; errEl.hidden = false; return; }
-  if (!email || !email.includes("@")) { errEl.textContent = "Please enter a valid email."; errEl.hidden = false; return; }
   errEl.hidden = true;
-
   try { localStorage.setItem("gherkin_display_name", name); } catch {}
+
+  // If email field is disabled, user is already signed in — just start the game
+  if (document.getElementById("auth-email").disabled) {
+    await startGame(); return;
+  }
+
+  if (!email || !email.includes("@")) { errEl.textContent = "Please enter a valid email."; errEl.hidden = false; return; }
 
   const { error } = await sb.auth.signInWithOtp({
     email,
@@ -429,64 +474,104 @@ function nextRound() {
 }
 
 // ---------------------------------------------------------------------------
+// Timer utility
+// ---------------------------------------------------------------------------
+let _timerInterval = null;
+function startTimer(seconds, barId, numId, onTimeout) {
+  clearInterval(_timerInterval);
+  let rem = seconds;
+  function tick() {
+    const bar = document.getElementById(barId);
+    const num = document.getElementById(numId);
+    if (!bar || !num) { clearInterval(_timerInterval); return; }
+    const pct = (rem / seconds) * 100;
+    bar.style.width = pct + "%";
+    num.textContent = rem;
+    const urgent = rem <= 5;
+    bar.classList.toggle("urgent", urgent);
+    num.classList.toggle("urgent", urgent);
+    if (rem <= 0) { clearInterval(_timerInterval); onTimeout(); return; }
+    rem--;
+  }
+  tick();
+  _timerInterval = setInterval(tick, 1000);
+}
+function stopTimer() { clearInterval(_timerInterval); }
+
+// ---------------------------------------------------------------------------
 // Round 1 — Career Path
 // ---------------------------------------------------------------------------
 function renderCareer(container, label, data) {
   const clubs = data.clubs || [];
-  let revealed = 1;
   let wrong = 0;
   let done = false;
 
-  function html() {
-    let list = clubs.map((c, i) =>
-      `<li class="${i < revealed ? "revealed" : "hidden"}">${c}</li>`
-    ).join("");
-    return `
-      <div class="round-label">${label}</div>
-      <div class="round-title">Which player had this career?</div>
-      <ul class="clubs-list" id="clubs-list">${list}</ul>
-      <div class="input-row" id="career-input-row">
-        <input type="text" id="career-guess" placeholder="Player name…" autocomplete="off"
-          onkeydown="if(event.key==='Enter')checkCareer()">
-        <button class="btn btn-primary" onclick="checkCareer()">Guess</button>
-      </div>
-      <div id="career-feedback"></div>
-      <div id="career-reveal-btn-wrap" style="margin-top:8px"></div>
-    `;
+  function clubsHtml() {
+    return clubs.map(cl => {
+      const name = cl.name || cl;
+      const stats = cl.apps !== undefined
+        ? `<span class="club-stats">${cl.apps} apps · ${cl.goals} goals</span>` : "";
+      return `<li class="revealed">${name}${stats}</li>`;
+    }).join("");
   }
 
-  const c = card(html());
+  const c = card(`
+    <div class="round-label">${label}</div>
+    <div class="round-title">Which player had this career?</div>
+    <div class="timer-row">
+      <div class="timer-bar"><div class="timer-bar-fill" id="career-tbar" style="width:100%"></div></div>
+      <div class="timer-num" id="career-tnum">30</div>
+    </div>
+    <ul class="clubs-list" id="clubs-list">${clubsHtml()}</ul>
+    <div class="round-points" id="career-pts">Worth up to 50 pts</div>
+    <div class="input-row" id="career-input-row">
+      <input type="text" id="career-guess" placeholder="Player name…" autocomplete="off"
+        onkeydown="if(event.key==='Enter')checkCareer()">
+      <button class="btn btn-primary" onclick="checkCareer()">Guess</button>
+    </div>
+    <div id="career-feedback"></div>
+  `);
   container.appendChild(c);
+
+  function timeOut() {
+    if (done) return;
+    wrong++;
+    document.getElementById("career-feedback").innerHTML =
+      `<div class="feedback wrong">Time's up! (${wrong} wrong guess${wrong>1?"es":""})</div>`;
+    document.getElementById("career-pts").textContent =
+      `Worth up to ${Math.max(0,50-wrong*10)} pts`;
+    if (wrong >= 5) { endCareer(0); return; }
+    startTimer(30, "career-tbar", "career-tnum", timeOut);
+  }
+
+  function endCareer(pts) {
+    done = true;
+    stopTimer();
+    if (pts === 0) {
+      document.getElementById("career-input-row").innerHTML =
+        `<div class="feedback reveal">The answer was <strong>${data.display}</strong></div>`;
+    }
+    showRoundResult(c, pts, data.display, label);
+    finishRound(pts);
+  }
+
+  startTimer(30, "career-tbar", "career-tnum", timeOut);
 
   window.checkCareer = function() {
     if (done) return;
     const guess = document.getElementById("career-guess").value.trim();
     if (!guess) return;
-
-    const correct = data.display;
-    if (checkAnswer(guess, correct) || checkAnswer(guess, data.answer)) {
-      done = true;
-      const pts = pointsForGuess(wrong);
-      showRoundResult(c, pts, correct, label);
-      finishRound(pts);
+    if (checkAnswer(guess, data.display) || checkAnswer(guess, data.answer)) {
+      endCareer(pointsForGuess(wrong));
     } else {
       wrong++;
       document.getElementById("career-guess").value = "";
       document.getElementById("career-feedback").innerHTML =
-        `<div class="feedback wrong">Not quite — ${wrong > 1 ? wrong + " wrong guesses" : "1 wrong guess"}</div>`;
-      if (revealed < clubs.length) {
-        revealed++;
-        document.getElementById("clubs-list").innerHTML =
-          clubs.map((c2, i) => `<li class="${i < revealed ? "revealed" : "hidden"}">${c2}</li>`).join("");
-      }
-      if (wrong >= 5) {
-        done = true;
-        document.getElementById("career-input-row").innerHTML =
-          `<div class="feedback reveal">The answer was <strong>${correct}</strong></div>`;
-        document.getElementById("clubs-list").innerHTML =
-          clubs.map(c2 => `<li class="revealed">${c2}</li>`).join("");
-        finishRound(0);
-      }
+        `<div class="feedback wrong">${wrong} wrong guess${wrong>1?"es":""}</div>`;
+      document.getElementById("career-pts").textContent =
+        `Worth up to ${Math.max(0,50-wrong*10)} pts`;
+      if (wrong >= 5) { endCareer(0); return; }
+      startTimer(30, "career-tbar", "career-tnum", timeOut);
     }
   };
 }
@@ -497,25 +582,44 @@ function renderCareer(container, label, data) {
 function renderStarting11(container, label, data) {
   const match = data.match;
   const hint = data.lineup_hint || "";
+  const hiddenName = data.display;
+  const hiddenAnswer = data.answer;
   let wrong = 0;
   let done = false;
 
-  // Parse lineup hint to show known players and hide the answer
-  const hiddenName = data.display;
-  const hiddenAnswer = data.answer;
-  const lineupDisplay = hint.replace(hiddenName, "???");
+  // Parse "Team: GK; DEF, DEF; MID, MID; FWD, FWD" into rows
+  function buildTeamSheet(revealAnswer) {
+    const colonIdx = hint.indexOf(':');
+    const teamName = colonIdx > -1 ? hint.substring(0, colonIdx).trim() : match.home;
+    const lineupStr = colonIdx > -1 ? hint.substring(colonIdx + 1) : hint;
+    const rows = lineupStr.split(';').map(r => r.trim()).filter(Boolean);
+    const rowsHtml = rows.map(row => {
+      const players = row.split(',').map(p => p.trim()).filter(Boolean);
+      const chips = players.map(p => {
+        const isMissing = !revealAnswer &&
+          (normalise(p) === normalise(hiddenName) ||
+           p.toLowerCase().includes(hiddenAnswer.replace(/_/g,' ')));
+        return isMissing
+          ? `<span class="player-chip missing">???</span>`
+          : `<span class="player-chip">${p}</span>`;
+      }).join('');
+      return `<div class="team-sheet-row">${chips}</div>`;
+    }).join('');
+    return `<div style="font-size:.7rem;color:rgba(255,255,255,.7);text-align:center;margin-bottom:6px">${teamName}</div>${rowsHtml}`;
+  }
 
   const c = card(`
     <div class="round-label">${label}</div>
     <div class="round-title">Who is the missing player?</div>
     <div class="clue-box">
       <div class="clue-num">The Match</div>
-      ${match.home} vs ${match.away}<br>
-      <span style="color:var(--fg2);font-size:.82rem">${match.competition} · ${match.date} · ${match.venue}</span>
+      <strong>${match.home} vs ${match.away}</strong><br>
+      <span style="color:var(--fg2);font-size:.82rem">${match.competition} · ${match.date}</span>
     </div>
-    <div class="clue-box" id="s11-lineup-box">
-      <div class="clue-num">Lineup</div>
-      <div style="font-size:.82rem;line-height:1.6">${lineupDisplay}</div>
+    <div class="team-sheet" id="s11-sheet">${buildTeamSheet(false)}</div>
+    <div class="timer-row">
+      <div class="timer-bar"><div class="timer-bar-fill" id="s11-tbar" style="width:100%"></div></div>
+      <div class="timer-num" id="s11-tnum">30</div>
     </div>
     <div class="round-points" id="s11-pts">Worth up to 50 pts</div>
     <div class="input-row" id="s11-input-row">
@@ -527,15 +631,37 @@ function renderStarting11(container, label, data) {
   `);
   container.appendChild(c);
 
+  function timeOut() {
+    if (done) return;
+    wrong++;
+    document.getElementById("s11-feedback").innerHTML =
+      `<div class="feedback wrong">Time's up! (${wrong} wrong guess${wrong>1?"es":""})</div>`;
+    document.getElementById("s11-pts").textContent =
+      `Worth up to ${Math.max(0,50-wrong*10)} pts`;
+    if (wrong >= 5) { endS11(0); return; }
+    startTimer(30, "s11-tbar", "s11-tnum", timeOut);
+  }
+
+  function endS11(pts) {
+    done = true;
+    stopTimer();
+    document.getElementById("s11-sheet").innerHTML = buildTeamSheet(true);
+    if (pts === 0) {
+      document.getElementById("s11-input-row").innerHTML =
+        `<div class="feedback reveal">The answer was <strong>${hiddenName}</strong></div>`;
+    }
+    showRoundResult(c, pts, hiddenName, label);
+    finishRound(pts);
+  }
+
+  startTimer(30, "s11-tbar", "s11-tnum", timeOut);
+
   window.checkS11 = function() {
     if (done) return;
     const guess = document.getElementById("s11-guess").value.trim();
     if (!guess) return;
     if (checkAnswer(guess, hiddenName) || checkAnswer(guess, hiddenAnswer)) {
-      done = true;
-      const pts = pointsForGuess(wrong);
-      showRoundResult(c, pts, hiddenName, label);
-      finishRound(pts);
+      endS11(pointsForGuess(wrong));
     } else {
       wrong++;
       document.getElementById("s11-guess").value = "";
@@ -543,14 +669,8 @@ function renderStarting11(container, label, data) {
         `<div class="feedback wrong">${wrong} wrong guess${wrong>1?"es":""}</div>`;
       document.getElementById("s11-pts").textContent =
         `Worth up to ${Math.max(0,50-wrong*10)} pts`;
-      if (wrong >= 5) {
-        done = true;
-        document.getElementById("s11-input-row").innerHTML =
-          `<div class="feedback reveal">The answer was <strong>${hiddenName}</strong></div>`;
-        document.getElementById("s11-lineup-box").innerHTML =
-          `<div class="clue-num">Lineup</div><div style="font-size:.82rem;line-height:1.6">${hint}</div>`;
-        finishRound(0);
-      }
+      if (wrong >= 5) { endS11(0); return; }
+      startTimer(30, "s11-tbar", "s11-tnum", timeOut);
     }
   };
 }
@@ -560,23 +680,43 @@ function renderStarting11(container, label, data) {
 // ---------------------------------------------------------------------------
 function renderEarworm(container, label, data) {
   const display = data.display; // "Song — Artist"
-  const parts = display.split(" — ");
-  const song = parts[0], artist = parts[1] || "";
+  const song = display.split(" — ")[0];
   let wrong = 0;
   let done = false;
+  let clipSecs = 1;        // starts at 1s, +1 each wrong guess
+  let audioEl = null;
+  let clipTimer = null;
+
+  function playClip() {
+    if (!data.preview_url) return;
+    if (audioEl) { audioEl.pause(); }
+    if (clipTimer) clearTimeout(clipTimer);
+    audioEl = new Audio(data.preview_url);
+    audioEl.play().catch(() => {});
+    const btn = document.getElementById("ew-play-btn");
+    if (btn) btn.textContent = `⏹ Playing (${clipSecs}s)…`;
+    clipTimer = setTimeout(() => {
+      audioEl.pause();
+      if (btn) btn.textContent = `▶ Play clip (${clipSecs}s)`;
+    }, clipSecs * 1000);
+  }
 
   const c = card(`
     <div class="round-label">${label}</div>
-    <div class="round-title">Name the song or artist</div>
+    <div class="round-title">Name the song</div>
     <div class="audio-wrap">
       ${data.preview_url
-        ? `<audio controls src="${data.preview_url}"></audio>`
+        ? `<button class="btn btn-secondary" id="ew-play-btn" onclick="ewPlay()" style="width:100%;margin-bottom:6px">▶ Play clip (1s)</button>`
         : `<div class="feedback reveal">⚠ Audio unavailable today</div>`}
-      <div class="audio-hint">30-second preview</div>
+      <div class="audio-hint" id="ew-clip-hint">Each wrong guess unlocks a longer clip</div>
+    </div>
+    <div class="timer-row">
+      <div class="timer-bar"><div class="timer-bar-fill" id="ew-tbar" style="width:100%"></div></div>
+      <div class="timer-num" id="ew-tnum">30</div>
     </div>
     <div class="round-points" id="ew-pts">Worth up to 50 pts</div>
     <div class="input-row" id="ew-input-row">
-      <input type="text" id="ew-guess" placeholder="Song or artist…" autocomplete="off"
+      <input type="text" id="ew-guess" placeholder="Song title…" autocomplete="off"
         onkeydown="if(event.key==='Enter')checkEarworm()">
       <button class="btn btn-primary" onclick="checkEarworm()">Guess</button>
     </div>
@@ -584,30 +724,55 @@ function renderEarworm(container, label, data) {
   `);
   container.appendChild(c);
 
+  window.ewPlay = playClip;
+
+  function timeOut() {
+    if (done) return;
+    wrong++;
+    clipSecs = Math.min(wrong + 1, 30);
+    const btn = document.getElementById("ew-play-btn");
+    if (btn) btn.textContent = `▶ Play clip (${clipSecs}s)`;
+    document.getElementById("ew-feedback").innerHTML =
+      `<div class="feedback wrong">Time's up! (${wrong} wrong guess${wrong>1?"es":""})</div>`;
+    document.getElementById("ew-pts").textContent =
+      `Worth up to ${Math.max(0,50-wrong*10)} pts`;
+    if (wrong >= 5) { endEarworm(0); return; }
+    startTimer(30, "ew-tbar", "ew-tnum", timeOut);
+  }
+
+  function endEarworm(pts) {
+    done = true;
+    stopTimer();
+    if (clipTimer) clearTimeout(clipTimer);
+    if (audioEl) audioEl.pause();
+    if (pts === 0) {
+      document.getElementById("ew-input-row").innerHTML =
+        `<div class="feedback reveal">The answer was <strong>${song}</strong></div>`;
+    }
+    showRoundResult(c, pts, song, label);
+    finishRound(pts);
+  }
+
+  startTimer(30, "ew-tbar", "ew-tnum", timeOut);
+
   window.checkEarworm = function() {
     if (done) return;
     const guess = document.getElementById("ew-guess").value.trim();
     if (!guess) return;
-    const hit = checkAnswer(guess, song) || checkAnswer(guess, artist) ||
-                checkAnswer(guess, display);
-    if (hit) {
-      done = true;
-      const pts = pointsForGuess(wrong);
-      showRoundResult(c, pts, display, label);
-      finishRound(pts);
+    if (checkAnswer(guess, song)) {
+      endEarworm(pointsForGuess(wrong));
     } else {
       wrong++;
+      clipSecs = Math.min(wrong + 1, 30);
       document.getElementById("ew-guess").value = "";
+      const btn = document.getElementById("ew-play-btn");
+      if (btn) btn.textContent = `▶ Play clip (${clipSecs}s)`;
       document.getElementById("ew-feedback").innerHTML =
         `<div class="feedback wrong">${wrong} wrong guess${wrong>1?"es":""}</div>`;
       document.getElementById("ew-pts").textContent =
         `Worth up to ${Math.max(0,50-wrong*10)} pts`;
-      if (wrong >= 5) {
-        done = true;
-        document.getElementById("ew-input-row").innerHTML =
-          `<div class="feedback reveal">The answer was <strong>${display}</strong></div>`;
-        finishRound(0);
-      }
+      if (wrong >= 5) { endEarworm(0); return; }
+      startTimer(30, "ew-tbar", "ew-tnum", timeOut);
     }
   };
 }

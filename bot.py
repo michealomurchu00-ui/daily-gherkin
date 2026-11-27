@@ -126,7 +126,7 @@ def build_day(day_num, state):
         "answer":          entry["answer"],
         "display":         entry["display"],
         "wikipedia_title": entry["wikipedia_title"],
-        "clubs":           entry["clubs"],
+        "clubs":           entry["clubs"],  # list of {name, apps, goals}
     }
 
     # --- Starting 11 ---
