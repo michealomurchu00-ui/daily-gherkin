@@ -1,0 +1,112 @@
+{
+  "round": "pin_the_pickle",
+  "source": "banked_coordinates",
+  "note": "Lat/lng are the target pin location. Scoring based on distance from correct point.",
+  "entries": [
+    {
+      "id": 1,
+      "question": "Where CSKA Moscow play their home games",
+      "location_name": "VEB Arena, Moscow, Russia",
+      "lat": 55.7158,
+      "lng": 37.7503
+    },
+    {
+      "id": 2,
+      "question": "Where Cristiano Ronaldo was born",
+      "location_name": "Funchal, Madeira, Portugal",
+      "lat": 32.6669,
+      "lng": -16.9241
+    },
+    {
+      "id": 3,
+      "question": "Where Princess Diana died in a car crash in the early hours of 31 August 1997",
+      "location_name": "Pont de l'Alma tunnel, Paris, France",
+      "lat": 48.8637,
+      "lng": 2.3022
+    },
+    {
+      "id": 4,
+      "question": "Where Pablo Escobar was shot dead on a rooftop while trying to escape capture",
+      "location_name": "Los Olivos, Medellín, Colombia",
+      "lat": 6.2518,
+      "lng": -75.5636
+    },
+    {
+      "id": 5,
+      "question": "Where the most notorious island prison in American history stood",
+      "location_name": "Alcatraz Island, San Francisco Bay, USA",
+      "lat": 37.8267,
+      "lng": -122.4230
+    },
+    {
+      "id": 6,
+      "question": "Where two skyscrapers stood before a Tuesday morning that changed the world",
+      "location_name": "World Trade Center site, Lower Manhattan, New York, USA",
+      "lat": 40.7115,
+      "lng": -74.0134
+    },
+    {
+      "id": 7,
+      "question": "Where a Roman city was buried under volcanic ash and preserved for 2,000 years",
+      "location_name": "Pompeii, Campania, Italy",
+      "lat": 40.7462,
+      "lng": 14.4989
+    },
+    {
+      "id": 8,
+      "question": "Where Charles Darwin observed the wildlife that inspired his theory of evolution",
+      "location_name": "Galápagos Islands, Ecuador",
+      "lat": -0.6500,
+      "lng": -90.3500
+    },
+    {
+      "id": 9,
+      "question": "Where the United States signed its declaration of independence from Britain",
+      "location_name": "Independence Hall, Philadelphia, Pennsylvania, USA",
+      "lat": 39.9489,
+      "lng": -75.1500
+    },
+    {
+      "id": 10,
+      "question": "Where Bob Marley was born in a tiny village in the hills",
+      "location_name": "Nine Mile, Saint Ann Parish, Jamaica",
+      "lat": 18.3384,
+      "lng": -77.1657
+    },
+    {
+      "id": 11,
+      "question": "Where the first iPhone was unveiled to the world by Steve Jobs",
+      "location_name": "Moscone Center, San Francisco, California, USA",
+      "lat": 37.7836,
+      "lng": -122.4005
+    },
+    {
+      "id": 12,
+      "question": "Where the bullet that started the First World War was fired",
+      "location_name": "Latin Bridge, Sarajevo, Bosnia and Herzegovina",
+      "lat": 43.8580,
+      "lng": 18.4322
+    },
+    {
+      "id": 13,
+      "question": "Where the world's most famous wildlife presenter was killed by a stingray",
+      "location_name": "Batt Reef, near Port Douglas, Queensland, Australia",
+      "lat": -16.0828,
+      "lng": 145.6400
+    },
+    {
+      "id": 14,
+      "question": "Where the first Olympic Games was held",
+      "location_name": "Ancient Olympia, Elis, Greece",
+      "lat": 37.6388,
+      "lng": 21.6300
+    },
+    {
+      "id": 15,
+      "question": "Where Apollo 11 launched on its journey to the moon in 1969",
+      "location_name": "Launch Complex 39A, Kennedy Space Center, Cape Canaveral, Florida, USA",
+      "lat": 28.6080,
+      "lng": -80.6042
+    }
+  ]
+}

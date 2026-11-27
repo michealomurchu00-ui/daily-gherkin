@@ -6,6 +6,7 @@
 <title>Daily Gherkin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
@@ -154,6 +155,30 @@ h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
     <p id="date-label"></p>
   </div>
 
+  <!-- Sign-in gate -->
+  <div id="auth-gate" hidden>
+    <div class="card">
+      <div class="round-label">Sign in to track your score</div>
+      <p style="color:var(--fg2);font-size:.85rem;margin-bottom:14px;line-height:1.5">
+        Enter your email and a display name. We'll send you a one-click magic link — no password needed.
+        Your email is never shown publicly.
+      </p>
+      <input type="text" id="auth-name" placeholder="Display name (shown on leaderboard)"
+        maxlength="24" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--fg);font-size:.95rem;outline:none;margin-bottom:8px">
+      <input type="email" id="auth-email" placeholder="your@email.com"
+        style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--fg);font-size:.95rem;outline:none;margin-bottom:10px"
+        onkeydown="if(event.key==='Enter')sendMagicLink()">
+      <div id="auth-error" style="color:var(--danger);font-size:.82rem;margin-bottom:8px" hidden></div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-primary" style="flex:1" onclick="sendMagicLink()">Send magic link ✉</button>
+        <button class="btn btn-secondary" onclick="playAnonymous()">Skip →</button>
+      </div>
+      <div id="auth-sent" hidden style="margin-top:12px;text-align:center;color:var(--accent);font-size:.88rem">
+        ✓ Magic link sent! Check your email, then come back here.
+      </div>
+    </div>
+  </div>
+
   <!-- Already played -->
   <div id="already-played" class="already-played" hidden>
     <h2>You've already played today!</h2>
@@ -223,10 +248,11 @@ h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
 
 <script>
 // ---------------------------------------------------------------------------
-// Config — replace with your Supabase project values
+// Config
 // ---------------------------------------------------------------------------
-const SUPABASE_URL = "https://ecjwljcnwamhjvijcouy.supabase.co";
+const SUPABASE_URL  = "https://ecjwljcnwamhjvijcouy.supabase.co";
 const SUPABASE_ANON = "sb_publishable_qThzYYQp-29CmlzIrP-QNA_UM4tmJKO";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
 // ---------------------------------------------------------------------------
 // State
@@ -260,6 +286,19 @@ async function init() {
     return;
   }
 
+  // Check for existing Supabase session (handles magic link callback from URL hash)
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) {
+    // Logged in — proceed straight to game
+    await startGame();
+  } else {
+    // Not logged in — show auth gate
+    document.getElementById("auth-gate").hidden = false;
+  }
+}
+
+async function startGame() {
+  document.getElementById("auth-gate").hidden = true;
   try {
     const r = await fetch("days/current.json?v=" + Date.now());
     if (!r.ok) throw new Error("No game today");
@@ -270,10 +309,36 @@ async function init() {
     document.getElementById("game").hidden = false;
     return;
   }
-
   buildProgressDots();
   document.getElementById("game").hidden = false;
   renderRound(0);
+}
+
+// ---------------------------------------------------------------------------
+// Auth gate handlers
+// ---------------------------------------------------------------------------
+async function sendMagicLink() {
+  const name  = document.getElementById("auth-name").value.trim();
+  const email = document.getElementById("auth-email").value.trim();
+  const errEl = document.getElementById("auth-error");
+
+  if (!name) { errEl.textContent = "Please enter a display name."; errEl.hidden = false; return; }
+  if (!email || !email.includes("@")) { errEl.textContent = "Please enter a valid email."; errEl.hidden = false; return; }
+  errEl.hidden = true;
+
+  try { localStorage.setItem("gherkin_display_name", name); } catch {}
+
+  const { error } = await sb.auth.signInWithOtp({
+    email,
+    options: { emailRedirectTo: location.href.split("?")[0].split("#")[0] }
+  });
+
+  if (error) { errEl.textContent = error.message; errEl.hidden = false; return; }
+  document.getElementById("auth-sent").hidden = false;
+}
+
+function playAnonymous() {
+  startGame();
 }
 
 // ---------------------------------------------------------------------------
@@ -792,8 +857,24 @@ function showFinal() {
 // ---------------------------------------------------------------------------
 // Leaderboard submit
 // ---------------------------------------------------------------------------
-function showLeaderboardSubmit() {
-  document.getElementById("submit-modal").hidden = false;
+async function showLeaderboardSubmit() {
+  const { data: { session } } = await sb.auth.getSession();
+  if (session) {
+    // Authenticated — auto-submit without modal
+    const name = (() => { try { return localStorage.getItem("gherkin_display_name") || ""; } catch { return ""; } })();
+    submittedName = name || "Anonymous";
+    try {
+      await sb.from("leaderboard").insert({
+        player_name: submittedName,
+        score: totalScore,
+        day: DAY.day,
+        user_id: session.user.id
+      });
+    } catch (e) { console.warn("Score submit error:", e); }
+    openLeaderboard();
+  } else {
+    document.getElementById("submit-modal").hidden = false;
+  }
 }
 
 async function submitScore() {
@@ -810,25 +891,16 @@ async function submitScore() {
 
   errEl.hidden = true;
   document.getElementById("submit-loading").hidden = false;
+  submittedName = name;
 
   try {
-    const r = await fetch(`${SUPABASE_URL}/rest/v1/leaderboard`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "apikey": SUPABASE_ANON,
-        "Authorization": `Bearer ${SUPABASE_ANON}`,
-        "Prefer": "return=minimal"
-      },
-      body: JSON.stringify({
-        player_name: name,
-        score: totalScore,
-        day: DAY.day,
-        email_hash: await sha256(email.toLowerCase().trim())
-      })
+    const { error } = await sb.from("leaderboard").insert({
+      player_name: name,
+      score: totalScore,
+      day: DAY.day,
+      email_hash: await sha256(email.toLowerCase().trim())
     });
-    if (!r.ok && r.status !== 409) throw new Error(await r.text());
-    submittedName = name;
+    if (error && error.code !== "23505") throw error; // 23505 = unique violation (already submitted)
   } catch (e) {
     console.warn("Score submit error:", e);
   }
@@ -872,11 +944,13 @@ async function loadLeaderboard() {
 async function loadToday() {
   document.getElementById("lb-title").textContent = "Today's Leaderboard";
   if (!lbData.today) {
-    const r = await fetch(
-      `${SUPABASE_URL}/rest/v1/leaderboard?day=eq.${DAY.day}&order=score.desc&limit=20`,
-      { headers: {"apikey": SUPABASE_ANON, "Authorization": `Bearer ${SUPABASE_ANON}`} }
-    );
-    lbData.today = await r.json();
+    const { data, error } = await sb.from("leaderboard")
+      .select("player_name,score")
+      .eq("day", DAY.day)
+      .order("score", { ascending: false })
+      .limit(20);
+    if (error) throw error;
+    lbData.today = data;
   }
   renderLbTable(lbData.today, "score");
 }
@@ -884,11 +958,9 @@ async function loadToday() {
 async function loadAllTime() {
   document.getElementById("lb-title").textContent = "All-time Leaderboard";
   if (!lbData.alltime) {
-    const r = await fetch(
-      `${SUPABASE_URL}/rest/v1/rpc/alltime_leaderboard`,
-      { headers: {"apikey": SUPABASE_ANON, "Authorization": `Bearer ${SUPABASE_ANON}`} }
-    );
-    lbData.alltime = await r.json();
+    const { data, error } = await sb.rpc("alltime_leaderboard");
+    if (error) throw error;
+    lbData.alltime = data;
   }
   renderLbTable(lbData.alltime, "avg_score", true);
 }

@@ -1,0 +1,21 @@
+{
+  "round": "earworm",
+  "source": "deezer_search",
+  "entries": [
+    { "id": 1,  "display": "Sweet Child O' Mine — Guns N' Roses",    "deezer_search": "Sweet Child O Mine Guns N Roses" },
+    { "id": 2,  "display": "Rolling in the Deep — Adele",             "deezer_search": "Rolling in the Deep Adele" },
+    { "id": 3,  "display": "Superstition — Stevie Wonder",            "deezer_search": "Superstition Stevie Wonder" },
+    { "id": 4,  "display": "Somebody That I Used to Know — Gotye",    "deezer_search": "Somebody That I Used to Know Gotye" },
+    { "id": 5,  "display": "Take On Me — a-ha",                       "deezer_search": "Take On Me a-ha" },
+    { "id": 6,  "display": "Crazy — Gnarls Barkley",                  "deezer_search": "Crazy Gnarls Barkley" },
+    { "id": 7,  "display": "Pumped Up Kicks — Foster the People",     "deezer_search": "Pumped Up Kicks Foster the People" },
+    { "id": 8,  "display": "Under the Bridge — Red Hot Chili Peppers","deezer_search": "Under the Bridge Red Hot Chili Peppers" },
+    { "id": 9,  "display": "Africa — Toto",                           "deezer_search": "Africa Toto" },
+    { "id": 10, "display": "Dog Days Are Over — Florence + The Machine", "deezer_search": "Dog Days Are Over Florence The Machine" },
+    { "id": 11, "display": "Semi-Charmed Life — Third Eye Blind",     "deezer_search": "Semi-Charmed Life Third Eye Blind" },
+    { "id": 12, "display": "Bittersweet Symphony — The Verve",        "deezer_search": "Bittersweet Symphony The Verve" },
+    { "id": 13, "display": "Get Lucky — Daft Punk",                   "deezer_search": "Get Lucky Daft Punk" },
+    { "id": 14, "display": "Take Me to Church — Hozier",              "deezer_search": "Take Me to Church Hozier" },
+    { "id": 15, "display": "Smooth Criminal — Michael Jackson",       "deezer_search": "Smooth Criminal Michael Jackson" }
+  ]
+}

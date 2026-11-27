@@ -1,0 +1,205 @@
+{
+  "round": "filmography",
+  "source": "banked",
+  "note": "Films ordered hardest to easiest (most obscure role first, most iconic last). Player sees one film at a time and guesses the actor.",
+  "scheduling_constraints": [
+    "Do not schedule ids 9 (Christian Bale) and 10 (Russell Crowe) on consecutive days — both open with Thor: Love and Thunder"
+  ],
+  "entries": [
+    {
+      "id": 1,
+      "answer": "morgan_freeman",
+      "display": "Morgan Freeman",
+      "films": [
+        "Batman Begins",
+        "Now You See Me",
+        "Million Dollar Baby",
+        "Bruce Almighty",
+        "Se7en",
+        "The Shawshank Redemption"
+      ]
+    },
+    {
+      "id": 2,
+      "answer": "meryl_streep",
+      "display": "Meryl Streep",
+      "films": [
+        "Kramer vs. Kramer",
+        "Julie & Julia",
+        "Heartburn",
+        "The Iron Lady",
+        "Sophie's Choice",
+        "The Devil Wears Prada"
+      ]
+    },
+    {
+      "id": 3,
+      "answer": "denzel_washington",
+      "display": "Denzel Washington",
+      "films": [
+        "Philadelphia",
+        "American Gangster",
+        "Man on Fire",
+        "Remember the Titans",
+        "Malcolm X",
+        "Training Day"
+      ]
+    },
+    {
+      "id": 4,
+      "answer": "brad_pitt",
+      "display": "Brad Pitt",
+      "films": [
+        "Babel",
+        "Ocean's Eleven",
+        "Snatch",
+        "Inglourious Basterds",
+        "Moneyball",
+        "Fight Club"
+      ]
+    },
+    {
+      "id": 5,
+      "answer": "julia_roberts",
+      "display": "Julia Roberts",
+      "films": [
+        "Mystic Pizza",
+        "Hook",
+        "My Best Friend's Wedding",
+        "Notting Hill",
+        "Erin Brockovich",
+        "Pretty Woman"
+      ]
+    },
+    {
+      "id": 6,
+      "answer": "anthony_hopkins",
+      "display": "Anthony Hopkins",
+      "films": [
+        "Thor",
+        "The Mask of Zorro",
+        "Red Dragon",
+        "The Two Popes",
+        "The Father",
+        "The Silence of the Lambs"
+      ]
+    },
+    {
+      "id": 7,
+      "answer": "joaquin_phoenix",
+      "display": "Joaquin Phoenix",
+      "films": [
+        "To Die For",
+        "Signs",
+        "Her",
+        "Gladiator",
+        "Napoleon",
+        "Joker"
+      ]
+    },
+    {
+      "id": 8,
+      "answer": "nicole_kidman",
+      "display": "Nicole Kidman",
+      "films": [
+        "Batman Forever",
+        "Aquaman",
+        "Days of Thunder",
+        "The Others",
+        "Eyes Wide Shut",
+        "Moulin Rouge!"
+      ]
+    },
+    {
+      "id": 9,
+      "answer": "christian_bale",
+      "display": "Christian Bale",
+      "films": [
+        "Thor: Love and Thunder",
+        "The Big Short",
+        "Ford v Ferrari",
+        "The Fighter",
+        "American Psycho",
+        "The Dark Knight"
+      ]
+    },
+    {
+      "id": 10,
+      "answer": "russell_crowe",
+      "display": "Russell Crowe",
+      "films": [
+        "Thor: Love and Thunder",
+        "Man of Steel",
+        "L.A. Confidential",
+        "Les Misérables",
+        "A Beautiful Mind",
+        "Gladiator"
+      ]
+    },
+    {
+      "id": 11,
+      "answer": "jamie_foxx",
+      "display": "Jamie Foxx",
+      "films": [
+        "Horrible Bosses",
+        "The Amazing Spider-Man 2",
+        "Baby Driver",
+        "Miami Vice",
+        "Collateral",
+        "Django Unchained"
+      ]
+    },
+    {
+      "id": 12,
+      "answer": "cillian_murphy",
+      "display": "Cillian Murphy",
+      "films": [
+        "Inception",
+        "Batman Begins",
+        "The Wind That Shakes the Barley",
+        "28 Days Later",
+        "Dunkirk",
+        "Oppenheimer"
+      ]
+    },
+    {
+      "id": 13,
+      "answer": "emily_blunt",
+      "display": "Emily Blunt",
+      "films": [
+        "Mary Poppins Returns",
+        "Oppenheimer",
+        "Sicario",
+        "Edge of Tomorrow",
+        "The Devil Wears Prada",
+        "A Quiet Place"
+      ]
+    },
+    {
+      "id": 14,
+      "answer": "orlando_bloom",
+      "display": "Orlando Bloom",
+      "films": [
+        "Black Hawk Down",
+        "The Lord of the Rings: The Return of the King",
+        "Troy",
+        "Kingdom of Heaven",
+        "The Hobbit: The Battle of the Five Armies",
+        "Pirates of the Caribbean: The Curse of the Black Pearl"
+      ]
+    },
+    {
+      "id": 15,
+      "answer": "idris_elba",
+      "display": "Idris Elba",
+      "films": [
+        "The Jungle Book",
+        "Star Trek Beyond",
+        "Fast & Furious Presents: Hobbs & Shaw",
+        "The Suicide Squad",
+        "Prometheus",
+        "Thor"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "round": "starting11",
+  "source": "memory",
+  "entries": [
+    {
+      "id": 1,
+      "answer": "yaya_toure",
+      "display": "Yaya Touré",
+      "match": {
+        "home": "Barcelona", "away": "Manchester United",
+        "competition": "UEFA Champions League Final",
+        "venue": "Stadio Olimpico, Rome", "date": "27 May 2009",
+        "wikipedia_title": "2009 UEFA Champions League Final"
+      },
+      "lineup_hint": "Barcelona: Valdés; Alves, Piqué, Touré, Abidal; Busquets, Xavi, Iniesta; Messi, Eto'o, Henry"
+    },
+    {
+      "id": 2,
+      "answer": "xabi_alonso",
+      "display": "Xabi Alonso",
+      "match": {
+        "home": "Liverpool", "away": "AC Milan",
+        "competition": "UEFA Champions League Final",
+        "venue": "Atatürk Olympic Stadium, Istanbul", "date": "25 May 2005",
+        "wikipedia_title": "2005 UEFA Champions League Final"
+      },
+      "lineup_hint": "Liverpool: Dudek; Finnan, Carragher, Hyypiä, Traore; Gerrard, Alonso, Hamann; Kewell, Baros, Riise"
+    },
+    {
+      "id": 3,
+      "answer": "juanfran",
+      "display": "Juanfran",
+      "match": {
+        "home": "Real Madrid", "away": "Atlético Madrid",
+        "competition": "UEFA Champions League Final",
+        "venue": "Estadio da Luz, Lisbon", "date": "24 May 2014",
+        "wikipedia_title": "2014 UEFA Champions League Final"
+      },
+      "lineup_hint": "Atlético: Courtois; Juanfran, Godín, Miranda, Filipe Luís; Tiago, Gabi; Arda Turan, Koke, Raúl García; Diego Costa"
+    },
+    {
+      "id": 4,
+      "answer": "malouda",
+      "display": "Florent Malouda",
+      "match": {
+        "home": "France", "away": "Italy",
+        "competition": "FIFA World Cup Final",
+        "venue": "Olympiastadion, Berlin", "date": "9 July 2006",
+        "wikipedia_title": "2006 FIFA World Cup Final"
+      },
+      "lineup_hint": "France: Barthez; Sagnol, Thuram, Gallas, Abidal; Vieira, Makelele; Malouda, Zidane, Ribéry; Henry"
+    },
+    {
+      "id": 5,
+      "answer": "kuyt",
+      "display": "Dirk Kuyt",
+      "match": {
+        "home": "Spain", "away": "Netherlands",
+        "competition": "FIFA World Cup Final",
+        "venue": "Soccer City, Johannesburg", "date": "11 July 2010",
+        "wikipedia_title": "2010 FIFA World Cup Final"
+      },
+      "lineup_hint": "Netherlands: Van der Sar; Van der Wiel, Mathijsen, Heitinga, Van Bronckhorst; Van Bommel, De Jong; Robben, Sneijder, Kuyt; Van Persie"
+    },
+    {
+      "id": 6,
+      "answer": "gotze",
+      "display": "Mario Götze",
+      "match": {
+        "home": "Germany", "away": "Argentina",
+        "competition": "FIFA World Cup Final",
+        "venue": "Estádio do Maracanã, Rio de Janeiro", "date": "13 July 2014",
+        "wikipedia_title": "2014 FIFA World Cup Final"
+      },
+      "lineup_hint": "Germany: Neuer; Lahm, Boateng, Hummels, Höwedes; Schweinsteiger, Khedira; Müller, Kroos, Özil; Klose"
+    },
+    {
+      "id": 7,
+      "answer": "sheringham",
+      "display": "Teddy Sheringham",
+      "match": {
+        "home": "Manchester United", "away": "Bayern Munich",
+        "competition": "UEFA Champions League Final",
+        "venue": "Camp Nou, Barcelona", "date": "26 May 1999",
+        "wikipedia_title": "1999 UEFA Champions League Final"
+      },
+      "lineup_hint": "Man Utd: Schmeichel; G. Neville, Johnsen, Stam, Irwin; Beckham, Butt, Blomqvist, Giggs; Cole, Sheringham"
+    },
+    {
+      "id": 8,
+      "answer": "pjanic",
+      "display": "Miralem Pjanić",
+      "match": {
+        "home": "Juventus", "away": "Real Madrid",
+        "competition": "UEFA Champions League Final",
+        "venue": "National Stadium, Cardiff", "date": "3 June 2017",
+        "wikipedia_title": "2017 UEFA Champions League Final"
+      },
+      "lineup_hint": "Juventus: Buffon; Dani Alves, Bonucci, Chiellini, Alex Sandro; Pjanić, Khedira; Cuadrado, Dybala, Mandžukić; Higuaín"
+    },
+    {
+      "id": 9,
+      "answer": "renato_sanches",
+      "display": "Renato Sanches",
+      "match": {
+        "home": "Portugal", "away": "France",
+        "competition": "UEFA European Championship Final",
+        "venue": "Stade de France, Paris", "date": "10 July 2016",
+        "wikipedia_title": "UEFA Euro 2016 Final"
+      },
+      "lineup_hint": "Portugal: Rui Patrício; Cédric, Pepe, Fonte, Guerreiro; W. Carvalho, Adrien, Renato Sanches; Quaresma, Nani; Ronaldo"
+    },
+    {
+      "id": 10,
+      "answer": "ballack",
+      "display": "Michael Ballack",
+      "match": {
+        "home": "Manchester United", "away": "Chelsea",
+        "competition": "UEFA Champions League Final",
+        "venue": "Luzhniki Stadium, Moscow", "date": "21 May 2008",
+        "wikipedia_title": "2008 UEFA Champions League Final"
+      },
+      "lineup_hint": "Chelsea: Čech; Essien, Carvalho, Terry, A. Cole; Makelele, Ballack; Kalou, Lampard, J. Cole; Drogba"
+    },
+    {
+      "id": 11,
+      "answer": "mata",
+      "display": "Juan Mata",
+      "match": {
+        "home": "Chelsea", "away": "Bayern Munich",
+        "competition": "UEFA Champions League Final",
+        "venue": "Allianz Arena, Munich", "date": "19 May 2012",
+        "wikipedia_title": "2012 UEFA Champions League Final"
+      },
+      "lineup_hint": "Chelsea: Čech; Bosingwa, Cahill, Terry, Cole; Ramires, Mikel, Lampard, Mata; Torres, Drogba"
+    },
+    {
+      "id": 12,
+      "answer": "lucas_moura",
+      "display": "Lucas Moura",
+      "match": {
+        "home": "Liverpool", "away": "Tottenham Hotspur",
+        "competition": "UEFA Champions League Final",
+        "venue": "Wanda Metropolitano, Madrid", "date": "1 June 2019",
+        "wikipedia_title": "2019 UEFA Champions League Final"
+      },
+      "lineup_hint": "Spurs: Lloris; Trippier, Alderweireld, Vertonghen, Rose; Winks, Sissoko; Lucas Moura, Eriksen, Son; Kane"
+    },
+    {
+      "id": 13,
+      "answer": "fabregas",
+      "display": "Cesc Fàbregas",
+      "match": {
+        "home": "Arsenal", "away": "Manchester United",
+        "competition": "FA Cup Final",
+        "venue": "Millennium Stadium, Cardiff", "date": "21 May 2005",
+        "wikipedia_title": "2005 FA Cup Final"
+      },
+      "lineup_hint": "Arsenal: Lehmann; Lauren, Touré, Senderos, Cole; Ljungberg, Fàbregas, Vieira, Pires; Bergkamp, Reyes"
+    },
+    {
+      "id": 14,
+      "answer": "baggio",
+      "display": "Roberto Baggio",
+      "match": {
+        "home": "Brazil", "away": "Italy",
+        "competition": "FIFA World Cup Final",
+        "venue": "Rose Bowl, Pasadena", "date": "17 July 1994",
+        "wikipedia_title": "1994 FIFA World Cup Final"
+      },
+      "lineup_hint": "Italy: Pagliuca; Mussi, Baresi, Maldini, Benarrivo; Berti, Albertini, Evani; Donadoni; R. Baggio, Massaro"
+    },
+    {
+      "id": 15,
+      "answer": "isco",
+      "display": "Isco",
+      "match": {
+        "home": "Real Madrid", "away": "Liverpool",
+        "competition": "UEFA Champions League Final",
+        "venue": "NSC Olimpiyskiy, Kyiv", "date": "26 May 2018",
+        "wikipedia_title": "2018 UEFA Champions League Final"
+      },
+      "lineup_hint": "Real Madrid: Navas; Carvajal, Varane, Ramos, Marcelo; Casemiro, Kroos, Modric; Isco, Benzema, Asensio"
+    }
+  ]
+}

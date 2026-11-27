@@ -1,0 +1,157 @@
+{
+  "round": "guess_the_year",
+  "source": "banked",
+  "note": "Clues ordered hardest first, sports/football clue always last",
+  "entries": [
+    {
+      "id": 1, "answer": 1999,
+      "clues": [
+        "Y2K hysteria gripped the world at its peak",
+        "The Matrix hit cinemas",
+        "Napster launched and shook the music industry",
+        "Stone Cold Steve Austin vs The Rock defined a generation of wrestling",
+        "Manchester United won the treble on the most dramatic night in football history"
+      ]
+    },
+    {
+      "id": 2, "answer": 2004,
+      "clues": [
+        "A social network launched for Harvard students that changed the world",
+        "Nearly 200 people were killed in coordinated train bombings in Madrid",
+        "A Super Bowl halftime show caused the biggest broadcast controversy in US history",
+        "The highest-grossing film starred a talking donkey and a lovable ogre",
+        "Greece pulled off the biggest upset in European Championship history"
+      ]
+    },
+    {
+      "id": 3, "answer": 2016,
+      "clues": [
+        "David Bowie died just two days after releasing his final album",
+        "Voters in the UK chose to leave the EU in a referendum that shocked the world",
+        "Donald Trump won the US presidential election",
+        "Athletes competed in the first South American Olympics",
+        "A 5000-1 outsider won the Premier League"
+      ]
+    },
+    {
+      "id": 4, "answer": 2012,
+      "clues": [
+        "Whitney Houston was found dead in a Beverly Hills hotel bathtub",
+        "Felix Baumgartner jumped from the edge of space and broke the sound barrier",
+        "A film franchise ended with its hero battling a masked villain in a sewer",
+        "The world's greatest sporting event came to Great Britain for the first time in 64 years",
+        "A London club became European champions by beating Bayern Munich on penalties"
+      ]
+    },
+    {
+      "id": 5, "answer": 2008,
+      "clues": [
+        "The collapse of Lehman Brothers triggered the worst global financial crisis since the 1930s",
+        "Heath Ledger died before audiences even saw his most iconic performance",
+        "Barack Obama became the first Black president of the United States",
+        "The world's most watched sporting event was held in a stadium nicknamed The Bird's Nest",
+        "Spain won their first major tournament in 44 years"
+      ]
+    },
+    {
+      "id": 6, "answer": 1998,
+      "clues": [
+        "Two Stanford students filed paperwork for a search engine that would change the internet",
+        "Bill Clinton faced impeachment over a scandal involving an intern",
+        "Titanic swept the Academy Awards",
+        "Apple launched the iMac in a range of candy colours",
+        "The host nation lifted the FIFA World Cup for the first time"
+      ]
+    },
+    {
+      "id": 7, "answer": 2003,
+      "clues": [
+        "Seven astronauts were killed when Space Shuttle Columbia broke apart during re-entry",
+        "The world's most iconic supersonic passenger jet, Concorde, made its final commercial flight",
+        "A new respiratory illness, SARS, spread from Asia and caused global panic",
+        "Coalition forces invaded Iraq on the basis of weapons of mass destruction",
+        "Roman Abramovich bought Chelsea and changed English football forever"
+      ]
+    },
+    {
+      "id": 8, "answer": 2010,
+      "clues": [
+        "A devastating earthquake killed over 200,000 people in Haiti",
+        "33 miners were rescued after spending 69 days trapped underground in Chile",
+        "Apple launched the iPad, creating a whole new product category",
+        "An oil rig explosion caused the largest accidental marine oil spill in history",
+        "Spain won their first FIFA World Cup, sealed with the latest goal in final history"
+      ]
+    },
+    {
+      "id": 9, "answer": 2006,
+      "clues": [
+        "Astronomers voted to strip Pluto of its planetary status after 76 years",
+        "Twitter launched and would reshape how news and politics worked",
+        "Saddam Hussein was executed by hanging, 56 days after sentencing",
+        "The World Cup final ended in one of sport's most infamous moments",
+        "Italy lifted the World Cup despite their captain's act of madness in the final"
+      ]
+    },
+    {
+      "id": 10, "answer": 2014,
+      "clues": [
+        "Malaysia Airlines flight MH370 disappeared with 239 people on board and was never found",
+        "Robin Williams died by suicide, shocking the world",
+        "Russia seized Crimea, triggering international condemnation",
+        "The Ice Bucket Challenge raised over $115 million for ALS charity",
+        "Germany humiliated the host nation Brazil 7-1 in the World Cup semi-final"
+      ]
+    },
+    {
+      "id": 11, "answer": 2019,
+      "clues": [
+        "Notre Dame Cathedral was devastated by a fire watched live by millions",
+        "Game of Thrones ended to a divisive reaction from fans",
+        "Boeing grounded its 737 Max model after two fatal crashes",
+        "Avengers: Endgame became the highest-grossing superhero film ever made",
+        "Liverpool ended a 14-year wait for a European Cup"
+      ]
+    },
+    {
+      "id": 12, "answer": 2002,
+      "clues": [
+        "European countries began using the Euro as physical coins and notes for the first time",
+        "A coordinated bombing at a Bali tourist resort killed 202 people, mostly young backpackers",
+        "Queen Elizabeth The Queen Mother died aged 101",
+        "Eminem made his Hollywood debut in the semi-autobiographical film 8 Mile",
+        "Brazil won their fifth FIFA World Cup in Japan and South Korea"
+      ]
+    },
+    {
+      "id": 13, "answer": 2007,
+      "clues": [
+        "Steve Jobs unveiled a device with no physical keyboard that changed how humans communicate",
+        "The Virginia Tech shooting killed 32 students and staff, the deadliest campus shooting in US history",
+        "Harry Potter and the Deathly Hallows sold 11 million copies in its first day",
+        "Barry Bonds broke the all-time Major League Baseball home run record amid controversy",
+        "David Beckham left Real Madrid for the LA Galaxy, shocking the football world"
+      ]
+    },
+    {
+      "id": 14, "answer": 2011,
+      "clues": [
+        "An earthquake and tsunami in Japan triggered the Fukushima nuclear disaster",
+        "Osama Bin Laden was shot dead in a compound in Abbottabad, Pakistan",
+        "Amy Winehouse died aged 27",
+        "Uprisings swept through the Arab world, toppling governments that had stood for decades",
+        "Barcelona became European champions for the fourth time in their history"
+      ]
+    },
+    {
+      "id": 15, "answer": 2017,
+      "clues": [
+        "Donald Trump's inauguration sparked one of the largest single-day protests in American history",
+        "A suicide bomber killed 22 people leaving an Ariana Grande concert attended mostly by teenagers",
+        "Hurricane Harvey made landfall in Texas as one of the most powerful Atlantic hurricanes ever recorded",
+        "Wonder Woman became one of the most commercially successful films of the year",
+        "Real Madrid became the first team to retain the Champions League in the modern era"
+      ]
+    }
+  ]
+}

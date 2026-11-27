@@ -1,0 +1,166 @@
+{
+  "round": "career_path",
+  "source": "memory + wikipedia_career_table",
+  "entries": [
+    {
+      "id": 1,
+      "answer": "ibrahimovic",
+      "display": "Zlatan Ibrahimović",
+      "wikipedia_title": "Zlatan Ibrahimović",
+      "clubs": [
+        "Malmö FF", "Ajax", "Juventus", "Inter Milan", "Barcelona",
+        "AC Milan", "Paris Saint-Germain", "Manchester United",
+        "LA Galaxy", "AC Milan", "Hammarby"
+      ]
+    },
+    {
+      "id": 2,
+      "answer": "drogba",
+      "display": "Didier Drogba",
+      "wikipedia_title": "Didier Drogba",
+      "clubs": [
+        "Le Mans", "Gueugnon", "Marseille", "Chelsea",
+        "Shanghai Shenhua", "Galatasaray", "Chelsea",
+        "Montréal Impact", "Chelsea", "Phoenix Rising"
+      ]
+    },
+    {
+      "id": 3,
+      "answer": "etoo",
+      "display": "Samuel Eto'o",
+      "wikipedia_title": "Samuel Eto'o",
+      "clubs": [
+        "Real Madrid", "Leganés", "Mallorca", "Barcelona",
+        "Inter Milan", "Anzhi Makhachkala", "Chelsea",
+        "Everton", "Sampdoria", "Antalyaspor", "Konyaspor"
+      ]
+    },
+    {
+      "id": 4,
+      "answer": "torres",
+      "display": "Fernando Torres",
+      "wikipedia_title": "Fernando Torres",
+      "clubs": [
+        "Atlético Madrid", "Liverpool", "Chelsea",
+        "AC Milan", "Atlético Madrid", "Sagan Tosu"
+      ]
+    },
+    {
+      "id": 5,
+      "answer": "villa",
+      "display": "David Villa",
+      "wikipedia_title": "David Villa",
+      "clubs": [
+        "Sporting Gijón", "Real Zaragoza", "Valencia",
+        "Barcelona", "Atlético Madrid", "New York City FC",
+        "Melbourne City", "Vissel Kobe", "Queensboro FC"
+      ]
+    },
+    {
+      "id": 6,
+      "answer": "shevchenko",
+      "display": "Andriy Shevchenko",
+      "wikipedia_title": "Andriy Shevchenko",
+      "clubs": [
+        "Dynamo Kyiv", "AC Milan", "Chelsea",
+        "AC Milan", "Dynamo Kyiv"
+      ]
+    },
+    {
+      "id": 7,
+      "answer": "vieira",
+      "display": "Patrick Vieira",
+      "wikipedia_title": "Patrick Vieira",
+      "clubs": [
+        "Cannes", "AC Milan", "Arsenal",
+        "Juventus", "Inter Milan", "Manchester City",
+        "New York Red Bulls"
+      ]
+    },
+    {
+      "id": 8,
+      "answer": "makelele",
+      "display": "Claude Makélélé",
+      "wikipedia_title": "Claude Makélélé",
+      "clubs": [
+        "Nantes", "Marseille", "Celta Vigo",
+        "Real Madrid", "Chelsea", "Paris Saint-Germain"
+      ]
+    },
+    {
+      "id": 9,
+      "answer": "robinho",
+      "display": "Robinho",
+      "wikipedia_title": "Robinho",
+      "clubs": [
+        "Santos", "Real Madrid", "Manchester City",
+        "AC Milan", "Santos", "Anzhi Makhachkala",
+        "AC Milan", "Atlético Mineiro", "Sivasspor", "Santos"
+      ]
+    },
+    {
+      "id": 10,
+      "answer": "crespo",
+      "display": "Hernán Crespo",
+      "wikipedia_title": "Hernán Crespo",
+      "clubs": [
+        "River Plate", "Parma", "Lazio",
+        "Inter Milan", "Chelsea", "AC Milan",
+        "Inter Milan", "Chelsea", "Genoa", "Parma"
+      ]
+    },
+    {
+      "id": 11,
+      "answer": "veron",
+      "display": "Juan Sebastián Verón",
+      "wikipedia_title": "Juan Sebastián Verón",
+      "clubs": [
+        "Estudiantes", "Boca Juniors", "Sampdoria",
+        "Parma", "Lazio", "Manchester United",
+        "Chelsea", "Inter Milan", "Estudiantes"
+      ]
+    },
+    {
+      "id": 12,
+      "answer": "heskey",
+      "display": "Emile Heskey",
+      "wikipedia_title": "Emile Heskey",
+      "clubs": [
+        "Leicester City", "Liverpool", "Birmingham City",
+        "Wigan Athletic", "Aston Villa", "Newcastle United",
+        "Bolton Wanderers", "Melbourne City"
+      ]
+    },
+    {
+      "id": 13,
+      "answer": "okocha",
+      "display": "Jay-Jay Okocha",
+      "wikipedia_title": "Austin Okocha",
+      "clubs": [
+        "Enugu Rangers", "Borussia Frankfurt", "Fenerbahçe",
+        "Paris Saint-Germain", "Bolton Wanderers",
+        "Hull City", "Al-Ahli Doha"
+      ]
+    },
+    {
+      "id": 14,
+      "answer": "owen",
+      "display": "Michael Owen",
+      "wikipedia_title": "Michael Owen",
+      "clubs": [
+        "Liverpool", "Real Madrid", "Newcastle United",
+        "Manchester United", "Stoke City"
+      ]
+    },
+    {
+      "id": 15,
+      "answer": "wrightphillips",
+      "display": "Shaun Wright-Phillips",
+      "wikipedia_title": "Shaun Wright-Phillips",
+      "clubs": [
+        "Manchester City", "Chelsea", "Manchester City",
+        "Queens Park Rangers", "Bursaspor", "MLS (New York Red Bulls/Chicago Fire)"
+      ]
+    }
+  ]
+}
