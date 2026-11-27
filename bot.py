@@ -145,10 +145,24 @@ def build_day(day_num, state):
     entry = pick_entry(banks["earworm"], ew_used)
     ew_used.append(entry["id"])
     deezer = get_deezer_preview(entry["deezer_search"])
+
+    # Download the MP3 so it never expires in the browser
+    local_mp3 = None
+    if deezer and deezer["preview_url"]:
+        try:
+            mp3_path = DAYS_DIR / "earworm.mp3"
+            r = requests.get(deezer["preview_url"], timeout=20)
+            r.raise_for_status()
+            mp3_path.write_bytes(r.content)
+            local_mp3 = "days/earworm.mp3"
+            print(f"  [earworm] Downloaded MP3 ({len(r.content)//1024}KB)")
+        except Exception as e:
+            print(f"  [warn] MP3 download failed: {e}")
+
     day["earworm"] = {
         "display":      entry["display"],
-        "preview_url":  deezer["preview_url"] if deezer else None,
-        "deezer_id":    deezer["deezer_id"]   if deezer else None,
+        "preview_url":  local_mp3 or (deezer["preview_url"] if deezer else None),
+        "deezer_id":    deezer["deezer_id"] if deezer else None,
     }
     if not deezer:
         print(f"  [warn] No Deezer preview found for: {entry['deezer_search']}")

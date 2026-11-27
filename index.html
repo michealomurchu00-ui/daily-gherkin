@@ -564,6 +564,7 @@ function renderCareer(container, label, data) {
       <input type="text" id="career-guess" placeholder="Player name…" autocomplete="off"
         onkeydown="if(event.key==='Enter')checkCareer()">
       <button class="btn btn-primary" onclick="checkCareer()">Guess</button>
+      <button class="skip-btn" onclick="skipCareer()">Skip →</button>
     </div>
     <div id="career-feedback"></div>
   `);
@@ -609,6 +610,16 @@ function renderCareer(container, label, data) {
       if (wrong >= 5) { endCareer(0); return; }
       startTimer(30, "career-tbar", "career-tnum", timeOut);
     }
+  };
+
+  window.skipCareer = function() {
+    if (done) return;
+    document.getElementById("career-guess").value = "";
+    wrong++;
+    document.getElementById("career-pts").textContent =
+      `Worth up to ${Math.max(0,50-wrong*10)} pts`;
+    if (wrong >= 5) { endCareer(0); return; }
+    stopTimer(); startTimer(30, "career-tbar", "career-tnum", timeOut);
   };
 }
 
@@ -662,6 +673,7 @@ function renderStarting11(container, label, data) {
       <input type="text" id="s11-guess" placeholder="Player name…" autocomplete="off"
         onkeydown="if(event.key==='Enter')checkS11()">
       <button class="btn btn-primary" onclick="checkS11()">Guess</button>
+      <button class="skip-btn" onclick="skipS11()">Skip →</button>
     </div>
     <div id="s11-feedback"></div>
   `);
@@ -691,6 +703,16 @@ function renderStarting11(container, label, data) {
   }
 
   startTimer(30, "s11-tbar", "s11-tnum", timeOut);
+
+  window.skipS11 = function() {
+    if (done) return;
+    document.getElementById("s11-guess").value = "";
+    wrong++;
+    document.getElementById("s11-pts").textContent =
+      `Worth up to ${Math.max(0,50-wrong*10)} pts`;
+    if (wrong >= 5) { endS11(0); return; }
+    stopTimer(); startTimer(30, "s11-tbar", "s11-tnum", timeOut);
+  };
 
   window.checkS11 = function() {
     if (done) return;
@@ -743,6 +765,7 @@ function renderEarworm(container, label, data) {
       <input type="text" id="ew-guess" placeholder="Song title…" autocomplete="off"
         onkeydown="if(event.key==='Enter')checkEarworm()">
       <button class="btn btn-primary" onclick="checkEarworm()">Guess</button>
+      <button class="skip-btn" onclick="skipEarworm()">Skip →</button>
     </div>
     <div id="ew-feedback"></div>
   `);
@@ -791,6 +814,20 @@ function renderEarworm(container, label, data) {
   }
 
   startTimer(30, "ew-tbar", "ew-tnum", timeOut);
+
+  window.skipEarworm = function() {
+    if (done) return;
+    document.getElementById("ew-guess").value = "";
+    wrong++;
+    clipIdx = Math.min(wrong, CLIP_DURATIONS.length - 1);
+    clipSecs = CLIP_DURATIONS[clipIdx];
+    const btn = document.getElementById("ew-play-btn");
+    if (btn) btn.textContent = `▶ Play clip (${clipSecs}s)`;
+    document.getElementById("ew-pts").textContent =
+      `Worth up to ${Math.max(0,50-wrong*10)} pts`;
+    if (wrong >= 5) { endEarworm(0); return; }
+    stopTimer(); startTimer(30, "ew-tbar", "ew-tnum", timeOut);
+  };
 
   window.checkEarworm = function() {
     if (done) return;
@@ -845,6 +882,7 @@ function renderGuessYear(container, label, data) {
       <input type="number" id="gty-guess" placeholder="Enter a year…" min="1950" max="2025"
         onkeydown="if(event.key==='Enter')checkYear()">
       <button class="btn btn-primary" onclick="checkYear()">Guess</button>
+      <button class="skip-btn" onclick="skipYear()">Skip →</button>
     </div>
     <div id="gty-feedback"></div>
   `);
@@ -870,6 +908,24 @@ function renderGuessYear(container, label, data) {
   }
 
   startTimer(30, "gty-tbar", "gty-tnum", gtyTimeOut);
+
+  window.skipYear = function() {
+    if (done) return;
+    document.getElementById("gty-guess").value = "";
+    wrong++;
+    document.getElementById("gty-pts").textContent =
+      `Worth up to ${Math.max(0,50-wrong*10)} pts`;
+    if (revealed < clues.length) { revealed++; document.getElementById("gty-clues").innerHTML = clueHtml(); }
+    if (wrong >= 5) {
+      done = true; stopTimer();
+      document.getElementById("gty-input-row").innerHTML =
+        `<div class="feedback reveal">The answer was <strong>${data.answer}</strong></div>`;
+      revealed = clues.length;
+      document.getElementById("gty-clues").innerHTML = clueHtml();
+      finishRound(0); return;
+    }
+    stopTimer(); startTimer(30, "gty-tbar", "gty-tnum", gtyTimeOut);
+  };
 
   window.checkYear = function() {
     if (done) return;

@@ -26,3 +26,6 @@ jobs:
 
       - name: Run bot
         run: python3 bot.py
+
+      - name: Stage earworm MP3
+        run: git add -f days/earworm.mp3 || true
