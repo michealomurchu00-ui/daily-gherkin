@@ -1,0 +1,67 @@
+{
+  "day": 1,
+  "date": "2026-11-27",
+  "career": {
+    "answer": "crespo",
+    "display": "Hernán Crespo",
+    "wikipedia_title": "Hernán Crespo",
+    "clubs": [
+      "River Plate",
+      "Parma",
+      "Lazio",
+      "Inter Milan",
+      "Chelsea",
+      "AC Milan",
+      "Inter Milan",
+      "Chelsea",
+      "Genoa",
+      "Parma"
+    ]
+  },
+  "starting11": {
+    "answer": "lucas_moura",
+    "display": "Lucas Moura",
+    "match": {
+      "home": "Liverpool",
+      "away": "Tottenham Hotspur",
+      "competition": "UEFA Champions League Final",
+      "venue": "Wanda Metropolitano, Madrid",
+      "date": "1 June 2019",
+      "wikipedia_title": "2019 UEFA Champions League Final"
+    },
+    "lineup_hint": "Spurs: Lloris; Trippier, Alderweireld, Vertonghen, Rose; Winks, Sissoko; Lucas Moura, Eriksen, Son; Kane"
+  },
+  "earworm": {
+    "display": "Take Me to Church — Hozier",
+    "preview_url": "https://cdnt-preview.dzcdn.net/api/1/1/7/5/1/0/7518991af8f790ef2f2898f6fb55d71b.mp3?hdnea=exp=1795744284~acl=/api/1/1/7/5/1/0/7518991af8f790ef2f2898f6fb55d71b.mp3*~data=user_id=0,application_id=42~hmac=c35ae6fffba358cc8f3ffe60cdbb0b5d48968be5fbc10dd874386fe20a8b6e97",
+    "deezer_id": 72690686
+  },
+  "guess_the_year": {
+    "answer": 1999,
+    "clues": [
+      "Y2K hysteria gripped the world at its peak",
+      "The Matrix hit cinemas",
+      "Napster launched and shook the music industry",
+      "Stone Cold Steve Austin vs The Rock defined a generation of wrestling",
+      "Manchester United won the treble on the most dramatic night in football history"
+    ]
+  },
+  "pin_the_pickle": {
+    "question": "Where Charles Darwin observed the wildlife that inspired his theory of evolution",
+    "location_name": "Galápagos Islands, Ecuador",
+    "lat": -0.65,
+    "lng": -90.35
+  },
+  "filmography": {
+    "answer": "cillian_murphy",
+    "display": "Cillian Murphy",
+    "films": [
+      "Inception",
+      "Batman Begins",
+      "The Wind That Shakes the Barley",
+      "28 Days Later",
+      "Dunkirk",
+      "Oppenheimer"
+    ]
+  }
+}
