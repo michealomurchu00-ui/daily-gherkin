@@ -1,0 +1,65 @@
+{
+  "day": 2,
+  "date": "2026-11-27",
+  "career": {
+    "answer": "heskey",
+    "display": "Emile Heskey",
+    "wikipedia_title": "Emile Heskey",
+    "clubs": [
+      "Leicester City",
+      "Liverpool",
+      "Birmingham City",
+      "Wigan Athletic",
+      "Aston Villa",
+      "Newcastle United",
+      "Bolton Wanderers",
+      "Melbourne City"
+    ]
+  },
+  "starting11": {
+    "answer": "juanfran",
+    "display": "Juanfran",
+    "match": {
+      "home": "Real Madrid",
+      "away": "Atlético Madrid",
+      "competition": "UEFA Champions League Final",
+      "venue": "Estadio da Luz, Lisbon",
+      "date": "24 May 2014",
+      "wikipedia_title": "2014 UEFA Champions League Final"
+    },
+    "lineup_hint": "Atlético: Courtois; Juanfran, Godín, Miranda, Filipe Luís; Tiago, Gabi; Arda Turan, Koke, Raúl García; Diego Costa"
+  },
+  "earworm": {
+    "display": "Sweet Child O' Mine — Guns N' Roses",
+    "preview_url": "https://cdnt-preview.dzcdn.net/api/1/1/5/9/1/0/59115eec88ea0bc7742eaba93facf49b.mp3?hdnea=exp=1795746795~acl=/api/1/1/5/9/1/0/59115eec88ea0bc7742eaba93facf49b.mp3*~data=user_id=0,application_id=42~hmac=f5593fc81f2bcdacb18552e4cd833d62cd8fa41a819dbe18503299697646ae60",
+    "deezer_id": 518458172
+  },
+  "guess_the_year": {
+    "answer": 2003,
+    "clues": [
+      "Seven astronauts were killed when Space Shuttle Columbia broke apart during re-entry",
+      "The world's most iconic supersonic passenger jet, Concorde, made its final commercial flight",
+      "A new respiratory illness, SARS, spread from Asia and caused global panic",
+      "Coalition forces invaded Iraq on the basis of weapons of mass destruction",
+      "Roman Abramovich bought Chelsea and changed English football forever"
+    ]
+  },
+  "pin_the_pickle": {
+    "question": "Where Bob Marley was born in a tiny village in the hills",
+    "location_name": "Nine Mile, Saint Ann Parish, Jamaica",
+    "lat": 18.3384,
+    "lng": -77.1657
+  },
+  "filmography": {
+    "answer": "emily_blunt",
+    "display": "Emily Blunt",
+    "films": [
+      "Mary Poppins Returns",
+      "Oppenheimer",
+      "Sicario",
+      "Edge of Tomorrow",
+      "The Devil Wears Prada",
+      "A Quiet Place"
+    ]
+  }
+}

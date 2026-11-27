@@ -1,67 +1,65 @@
 {
-  "day": 1,
+  "day": 2,
   "date": "2026-11-27",
   "career": {
-    "answer": "crespo",
-    "display": "Hernán Crespo",
-    "wikipedia_title": "Hernán Crespo",
+    "answer": "heskey",
+    "display": "Emile Heskey",
+    "wikipedia_title": "Emile Heskey",
     "clubs": [
-      "River Plate",
-      "Parma",
-      "Lazio",
-      "Inter Milan",
-      "Chelsea",
-      "AC Milan",
-      "Inter Milan",
-      "Chelsea",
-      "Genoa",
-      "Parma"
+      "Leicester City",
+      "Liverpool",
+      "Birmingham City",
+      "Wigan Athletic",
+      "Aston Villa",
+      "Newcastle United",
+      "Bolton Wanderers",
+      "Melbourne City"
     ]
   },
   "starting11": {
-    "answer": "lucas_moura",
-    "display": "Lucas Moura",
+    "answer": "juanfran",
+    "display": "Juanfran",
     "match": {
-      "home": "Liverpool",
-      "away": "Tottenham Hotspur",
+      "home": "Real Madrid",
+      "away": "Atlético Madrid",
       "competition": "UEFA Champions League Final",
-      "venue": "Wanda Metropolitano, Madrid",
-      "date": "1 June 2019",
-      "wikipedia_title": "2019 UEFA Champions League Final"
+      "venue": "Estadio da Luz, Lisbon",
+      "date": "24 May 2014",
+      "wikipedia_title": "2014 UEFA Champions League Final"
     },
-    "lineup_hint": "Spurs: Lloris; Trippier, Alderweireld, Vertonghen, Rose; Winks, Sissoko; Lucas Moura, Eriksen, Son; Kane"
+    "lineup_hint": "Atlético: Courtois; Juanfran, Godín, Miranda, Filipe Luís; Tiago, Gabi; Arda Turan, Koke, Raúl García; Diego Costa"
   },
   "earworm": {
-    "display": "Take Me to Church — Hozier",
-    "preview_url": "https://cdnt-preview.dzcdn.net/api/1/1/7/5/1/0/7518991af8f790ef2f2898f6fb55d71b.mp3?hdnea=exp=1795744284~acl=/api/1/1/7/5/1/0/7518991af8f790ef2f2898f6fb55d71b.mp3*~data=user_id=0,application_id=42~hmac=c35ae6fffba358cc8f3ffe60cdbb0b5d48968be5fbc10dd874386fe20a8b6e97",
-    "deezer_id": 72690686
+    "display": "Sweet Child O' Mine — Guns N' Roses",
+    "preview_url": "https://cdnt-preview.dzcdn.net/api/1/1/5/9/1/0/59115eec88ea0bc7742eaba93facf49b.mp3?hdnea=exp=1795746795~acl=/api/1/1/5/9/1/0/59115eec88ea0bc7742eaba93facf49b.mp3*~data=user_id=0,application_id=42~hmac=f5593fc81f2bcdacb18552e4cd833d62cd8fa41a819dbe18503299697646ae60",
+    "deezer_id": 518458172
   },
   "guess_the_year": {
-    "answer": 1999,
+    "answer": 2003,
     "clues": [
-      "Y2K hysteria gripped the world at its peak",
-      "The Matrix hit cinemas",
-      "Napster launched and shook the music industry",
-      "Stone Cold Steve Austin vs The Rock defined a generation of wrestling",
-      "Manchester United won the treble on the most dramatic night in football history"
+      "Seven astronauts were killed when Space Shuttle Columbia broke apart during re-entry",
+      "The world's most iconic supersonic passenger jet, Concorde, made its final commercial flight",
+      "A new respiratory illness, SARS, spread from Asia and caused global panic",
+      "Coalition forces invaded Iraq on the basis of weapons of mass destruction",
+      "Roman Abramovich bought Chelsea and changed English football forever"
     ]
   },
   "pin_the_pickle": {
-    "question": "Where Charles Darwin observed the wildlife that inspired his theory of evolution",
-    "location_name": "Galápagos Islands, Ecuador",
-    "lat": -0.65,
-    "lng": -90.35
+    "question": "Where Bob Marley was born in a tiny village in the hills",
+    "location_name": "Nine Mile, Saint Ann Parish, Jamaica",
+    "lat": 18.3384,
+    "lng": -77.1657
   },
   "filmography": {
-    "answer": "cillian_murphy",
-    "display": "Cillian Murphy",
+    "answer": "emily_blunt",
+    "display": "Emily Blunt",
     "films": [
-      "Inception",
-      "Batman Begins",
-      "The Wind That Shakes the Barley",
-      "28 Days Later",
-      "Dunkirk",
-      "Oppenheimer"
+      "Mary Poppins Returns",
+      "Oppenheimer",
+      "Sicario",
+      "Edge of Tomorrow",
+      "The Devil Wears Prada",
+      "A Quiet Place"
     ]
   }
 }
