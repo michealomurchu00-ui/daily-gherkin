@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Gherkin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root {
+  --bg: #f7f7f3;
+  --surface: #ffffff;
+  --border: #e2e2da;
+  --fg: #1a1a18;
+  --fg2: #6b6b60;
+  --accent: #2d7a4f;
+  --accent-light: #e8f5ed;
+  --danger: #c0392b;
+  --warn: #e67e22;
+  --score: #2d7a4f;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #18181b; --surface: #26262a; --border: #3a3a40;
+    --fg: #f0f0ea; --fg2: #9a9a90; --accent: #3dab6a;
+    --accent-light: #1a3326; --score: #3dab6a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #18181b; --surface: #26262a; --border: #3a3a40;
+  --fg: #f0f0ea; --fg2: #9a9a90; --accent: #3dab6a;
+  --accent-light: #1a3326; --score: #3dab6a; color-scheme: dark;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--fg); font-family: 'Inter', sans-serif; font-size: 15px; min-height: 100vh; }
+h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; }
+
+/* Layout */
+.app { max-width: 540px; margin: 0 auto; padding: 20px 16px 60px; }
+.header { text-align: center; padding: 24px 0 20px; }
+.header h1 { font-size: 2rem; color: var(--accent); letter-spacing: -0.5px; }
+.header p { color: var(--fg2); font-size: 0.85rem; margin-top: 4px; }
+
+/* Score bar */
+.score-bar { display: flex; justify-content: space-between; align-items: center;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 10px 16px; margin-bottom: 20px; }
+.score-bar .label { font-size: 0.8rem; color: var(--fg2); text-transform: uppercase; letter-spacing: 0.08em; }
+.score-bar .value { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; color: var(--score); }
+
+/* Round card */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 20px; margin-bottom: 16px; }
+.round-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--fg2); margin-bottom: 6px; }
+.round-title { font-size: 1.2rem; margin-bottom: 16px; }
+.round-points { font-size: 0.8rem; color: var(--accent); font-weight: 600; }
+
+/* Clue reveal */
+.clue-box { background: var(--accent-light); border-radius: 8px; padding: 12px 14px;
+  margin-bottom: 10px; font-size: 0.9rem; line-height: 1.5; }
+.clue-box.locked { opacity: 0.4; filter: blur(3px); user-select: none; }
+.clue-num { font-size: 0.72rem; color: var(--accent); font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+
+/* Input row */
+.input-row { display: flex; gap: 8px; margin-top: 12px; }
+.input-row input { flex: 1; padding: 10px 12px; border: 1px solid var(--border);
+  border-radius: 8px; background: var(--bg); color: var(--fg); font-size: 0.95rem; outline: none; }
+.input-row input:focus { border-color: var(--accent); }
+.btn { padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer;
+  font-weight: 600; font-size: 0.9rem; font-family: 'Inter', sans-serif; transition: opacity .15s; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover:not(:disabled) { opacity: 0.85; }
+.btn-secondary { background: var(--border); color: var(--fg); }
+
+/* Feedback */
+.feedback { margin-top: 10px; padding: 8px 12px; border-radius: 8px; font-size: 0.88rem; font-weight: 500; }
+.feedback.wrong { background: #fdecea; color: var(--danger); }
+.feedback.right { background: var(--accent-light); color: var(--accent); }
+.feedback.reveal { background: #fff8e1; color: #7a5a00; }
+
+/* Clubs list (career path) */
+.clubs-list { list-style: none; }
+.clubs-list li { padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; color: var(--fg2); }
+.clubs-list li.revealed { color: var(--fg); font-weight: 500; }
+.clubs-list li.hidden { filter: blur(5px); user-select: none; }
+
+/* Audio player */
+.audio-wrap { text-align: center; margin: 8px 0 14px; }
+.audio-wrap audio { width: 100%; border-radius: 8px; }
+.audio-hint { font-size: 0.8rem; color: var(--fg2); margin-top: 6px; }
+
+/* Map */
+#map { height: 300px; border-radius: 8px; margin-bottom: 14px; border: 1px solid var(--border); }
+.map-distance { font-size: 0.88rem; color: var(--fg2); text-align: center; margin-bottom: 8px; }
+
+/* Films list */
+.films-list { list-style: none; }
+.films-list li { padding: 7px 0; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+.films-list li.locked { filter: blur(5px); user-select: none; color: var(--fg2); }
+
+/* Leaderboard modal */
+.modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.5);
+  display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 16px; }
+.modal { background: var(--surface); border-radius: var(--radius); padding: 24px;
+  max-width: 400px; width: 100%; max-height: 90vh; overflow-y: auto; }
+.modal h2 { font-size: 1.3rem; margin-bottom: 16px; }
+.modal input { width: 100%; padding: 10px 12px; border: 1px solid var(--border);
+  border-radius: 8px; background: var(--bg); color: var(--fg); font-size: 0.95rem;
+  outline: none; margin-bottom: 10px; }
+.modal input:focus { border-color: var(--accent); }
+
+/* Leaderboard table */
+.lb-table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.88rem; }
+.lb-table th { text-align: left; padding: 6px 8px; color: var(--fg2);
+  font-weight: 500; border-bottom: 2px solid var(--border); }
+.lb-table td { padding: 8px 8px; border-bottom: 1px solid var(--border); }
+.lb-table tr.me td { font-weight: 700; color: var(--accent); }
+.lb-rank { font-weight: 700; color: var(--fg2); }
+
+/* Round completed overlay */
+.round-done { text-align: center; padding: 12px 0; }
+.round-done .points-earned { font-family: 'Space Grotesk', sans-serif;
+  font-size: 2rem; color: var(--accent); }
+.round-done .points-label { font-size: 0.8rem; color: var(--fg2); margin-top: 2px; }
+
+/* Final screen */
+.final-screen { text-align: center; padding: 32px 0; }
+.final-score { font-family: 'Space Grotesk', sans-serif; font-size: 3.5rem;
+  color: var(--accent); line-height: 1; }
+.final-max { font-size: 1rem; color: var(--fg2); margin-top: 4px; }
+.final-msg { font-size: 1.1rem; margin: 16px 0 24px; }
+.already-played { text-align: center; padding: 60px 20px; }
+
+/* Progress dots */
+.progress { display: flex; gap: 8px; justify-content: center; margin-bottom: 24px; }
+.progress .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); transition: background .3s; }
+.progress .dot.done { background: var(--accent); }
+.progress .dot.active { background: var(--accent); opacity: .5; }
+
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <div class="header">
+    <h1>🥒 Daily Gherkin</h1>
+    <p id="date-label"></p>
+  </div>
+
+  <!-- Already played -->
+  <div id="already-played" class="already-played" hidden>
+    <h2>You've already played today!</h2>
+    <p style="color:var(--fg2);margin-top:8px">Come back tomorrow for a new game.</p>
+    <div id="already-score" style="margin-top:24px"></div>
+  </div>
+
+  <!-- Game -->
+  <div id="game" hidden>
+    <div class="score-bar">
+      <div><div class="label">Score</div><div class="value" id="score-display">0</div></div>
+      <div style="text-align:right"><div class="label">Round</div><div class="value" id="round-display">1 / 6</div></div>
+    </div>
+
+    <div class="progress" id="progress-dots"></div>
+
+    <div id="rounds-container"></div>
+
+    <div id="next-btn-wrap" hidden style="text-align:center;margin-top:8px">
+      <button class="btn btn-primary" onclick="nextRound()">Next Round →</button>
+    </div>
+  </div>
+
+  <!-- Final screen -->
+  <div id="final-screen" class="final-screen" hidden>
+    <div class="final-score" id="final-score-num">0</div>
+    <div class="final-max">out of 300</div>
+    <div class="final-msg" id="final-msg"></div>
+    <button class="btn btn-primary" onclick="showLeaderboardSubmit()">Submit Score & See Leaderboard</button>
+  </div>
+
+</div>
+
+<!-- Submit modal -->
+<div id="submit-modal" class="modal-backdrop" hidden>
+  <div class="modal">
+    <h2>Submit your score</h2>
+    <p style="color:var(--fg2);font-size:.85rem;margin-bottom:14px">
+      Enter your email to verify your identity and choose a display name for the leaderboard.
+      Your email is never shown publicly.
+    </p>
+    <input type="email" id="submit-email" placeholder="your@email.com" autocomplete="email">
+    <input type="text" id="submit-name" placeholder="Display name" maxlength="24" autocomplete="nickname">
+    <div id="submit-error" style="color:var(--danger);font-size:.82rem;margin-bottom:8px" hidden></div>
+    <div style="display:flex;gap:8px;margin-top:4px">
+      <button class="btn btn-primary" style="flex:1" onclick="submitScore()">Submit</button>
+      <button class="btn btn-secondary" onclick="skipSubmit()">Skip</button>
+    </div>
+    <div id="submit-loading" hidden style="text-align:center;color:var(--fg2);margin-top:10px;font-size:.85rem">Submitting…</div>
+  </div>
+</div>
+
+<!-- Leaderboard modal -->
+<div id="lb-modal" class="modal-backdrop" hidden>
+  <div class="modal">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <h2 id="lb-title">Today's Leaderboard</h2>
+      <button class="btn btn-secondary" style="padding:6px 12px;font-size:.8rem" onclick="toggleLbView()">All-time</button>
+    </div>
+    <div id="lb-content"><p style="color:var(--fg2);font-size:.85rem">Loading…</p></div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <button class="btn btn-secondary" style="flex:1" onclick="closeLb()">Close</button>
+      <button class="btn btn-primary" style="flex:1" onclick="shareScore()">Share 📋</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---------------------------------------------------------------------------
+// Config — replace with your Supabase project values
+// ---------------------------------------------------------------------------
+const SUPABASE_URL = "https://ecjwljcnwamhjvijcouy.supabase.co";
+const SUPABASE_ANON = "sb_publishable_qThzYYQp-29CmlzIrP-QNA_UM4tmJKO";
+
+// ---------------------------------------------------------------------------
+// State
+// ---------------------------------------------------------------------------
+let DAY = null;          // today's day config (fetched from days/current.json)
+let totalScore = 0;
+let roundScores = [];    // score per round
+let currentRound = 0;   // 0-based index
+let lbViewAllTime = false;
+let submittedName = null;
+
+const ROUNDS = ["career","starting11","earworm","guess_the_year","pin_the_pickle","filmography"];
+const ROUND_LABELS = ["Career Path","Starting 11","Earworm","Guess the Year","Pin the Pickle","Filmography"];
+
+// ---------------------------------------------------------------------------
+// Init
+// ---------------------------------------------------------------------------
+async function init() {
+  document.getElementById("date-label").textContent =
+    new Date().toLocaleDateString("en-GB", {weekday:"long",day:"numeric",month:"long",year:"numeric"});
+
+  const todayKey = `gherkin_played_${new Date().toISOString().slice(0,10)}`;
+  const played = (() => { try { return localStorage.getItem(todayKey); } catch { return null; } })();
+
+  if (played) {
+    const data = JSON.parse(played);
+    document.getElementById("already-played").hidden = false;
+    document.getElementById("already-score").innerHTML =
+      `<div style="font-family:'Space Grotesk',sans-serif;font-size:2.5rem;color:var(--accent)">${data.score}</div>
+       <div style="color:var(--fg2);font-size:.85rem">your score today</div>`;
+    return;
+  }
+
+  try {
+    const r = await fetch("days/current.json?v=" + Date.now());
+    if (!r.ok) throw new Error("No game today");
+    DAY = await r.json();
+  } catch (e) {
+    document.getElementById("game").innerHTML =
+      `<div class="card" style="text-align:center;color:var(--fg2)">No game loaded yet. Check back soon!</div>`;
+    document.getElementById("game").hidden = false;
+    return;
+  }
+
+  buildProgressDots();
+  document.getElementById("game").hidden = false;
+  renderRound(0);
+}
+
+// ---------------------------------------------------------------------------
+// Progress dots
+// ---------------------------------------------------------------------------
+function buildProgressDots() {
+  const wrap = document.getElementById("progress-dots");
+  ROUNDS.forEach((_, i) => {
+    const d = document.createElement("div");
+    d.className = "dot" + (i === 0 ? " active" : "");
+    d.id = `dot-${i}`;
+    wrap.appendChild(d);
+  });
+}
+
+function updateDots(round) {
+  ROUNDS.forEach((_, i) => {
+    const d = document.getElementById(`dot-${i}`);
+    if (i < round) d.className = "dot done";
+    else if (i === round) d.className = "dot active";
+    else d.className = "dot";
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Round router
+// ---------------------------------------------------------------------------
+function renderRound(idx) {
+  currentRound = idx;
+  updateDots(idx);
+  document.getElementById("round-display").textContent = `${idx + 1} / 6`;
+  document.getElementById("score-display").textContent = totalScore;
+  document.getElementById("next-btn-wrap").hidden = true;
+
+  const container = document.getElementById("rounds-container");
+  container.innerHTML = "";
+
+  const roundKey = ROUNDS[idx];
+  const label = ROUND_LABELS[idx];
+  const data = DAY[roundKey] || DAY[roundKey.replace("_","")];
+
+  if (roundKey === "career")        renderCareer(container, label, data);
+  else if (roundKey === "starting11") renderStarting11(container, label, data);
+  else if (roundKey === "earworm")  renderEarworm(container, label, data);
+  else if (roundKey === "guess_the_year") renderGuessYear(container, label, data);
+  else if (roundKey === "pin_the_pickle") renderPinPickle(container, label, data);
+  else if (roundKey === "filmography") renderFilmography(container, label, data);
+}
+
+// ---------------------------------------------------------------------------
+// Generic helpers
+// ---------------------------------------------------------------------------
+function card(innerHTML) {
+  const d = document.createElement("div");
+  d.className = "card";
+  d.innerHTML = innerHTML;
+  return d;
+}
+
+function normalise(s) {
+  return s.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function checkAnswer(guess, correct) {
+  const g = normalise(guess), c = normalise(correct);
+  if (g === c) return true;
+  // allow partial match if answer is multi-word surname
+  const parts = c.split("");
+  return g.length >= 3 && c.includes(g);
+}
+
+function pointsForGuess(wrongSoFar) {
+  return Math.max(0, 50 - wrongSoFar * 10);
+}
+
+function finishRound(pts) {
+  totalScore += pts;
+  roundScores.push(pts);
+  document.getElementById("score-display").textContent = totalScore;
+  document.getElementById("next-btn-wrap").hidden = (currentRound >= ROUNDS.length - 1);
+  if (currentRound >= ROUNDS.length - 1) {
+    setTimeout(showFinal, 800);
+  }
+}
+
+function nextRound() {
+  renderRound(currentRound + 1);
+}
+
+// ---------------------------------------------------------------------------
+// Round 1 — Career Path
+// ---------------------------------------------------------------------------
+function renderCareer(container, label, data) {
+  const clubs = data.clubs || [];
+  let revealed = 1;
+  let wrong = 0;
+  let done = false;
+
+  function html() {
+    let list = clubs.map((c, i) =>
+      `<li class="${i < revealed ? "revealed" : "hidden"}">${c}</li>`
+    ).join("");
+    return `
+      <div class="round-label">${label}</div>
+      <div class="round-title">Which player had this career?</div>
+      <ul class="clubs-list" id="clubs-list">${list}</ul>
+      <div class="input-row" id="career-input-row">
+        <input type="text" id="career-guess" placeholder="Player name…" autocomplete="off"
+          onkeydown="if(event.key==='Enter')checkCareer()">
+        <button class="btn btn-primary" onclick="checkCareer()">Guess</button>
+      </div>
+      <div id="career-feedback"></div>
+      <div id="career-reveal-btn-wrap" style="margin-top:8px"></div>
+    `;
+  }
+
+  const c = card(html());
+  container.appendChild(c);
+
+  window.checkCareer = function() {
+    if (done) return;
+    const guess = document.getElementById("career-guess").value.trim();
+    if (!guess) return;
+
+    const correct = data.display;
+    if (checkAnswer(guess, correct) || checkAnswer(guess, data.answer)) {
+      done = true;
+      const pts = pointsForGuess(wrong);
+      showRoundResult(c, pts, correct, label);
+      finishRound(pts);
+    } else {
+      wrong++;
+      document.getElementById("career-guess").value = "";
+      document.getElementById("career-feedback").innerHTML =
+        `<div class="feedback wrong">Not quite — ${wrong > 1 ? wrong + " wrong guesses" : "1 wrong guess"}</div>`;
+      if (revealed < clubs.length) {
+        revealed++;
+        document.getElementById("clubs-list").innerHTML =
+          clubs.map((c2, i) => `<li class="${i < revealed ? "revealed" : "hidden"}">${c2}</li>`).join("");
+      }
+      if (wrong >= 5) {
+        done = true;
+        document.getElementById("career-input-row").innerHTML =
+          `<div class="feedback reveal">The answer was <strong>${correct}</strong></div>`;
+        document.getElementById("clubs-list").innerHTML =
+          clubs.map(c2 => `<li class="revealed">${c2}</li>`).join("");
+        finishRound(0);
+      }
+    }
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Round 2 — Starting 11
+// ---------------------------------------------------------------------------
+function renderStarting11(container, label, data) {
+  const match = data.match;
+  const hint = data.lineup_hint || "";
+  let wrong = 0;
+  let done = false;
+
+  // Parse lineup hint to show known players and hide the answer
+  const hiddenName = data.display;
+  const hiddenAnswer = data.answer;
+  const lineupDisplay = hint.replace(hiddenName, "???");
+
+  const c = card(`
+    <div class="round-label">${label}</div>
+    <div class="round-title">Who is the missing player?</div>
+    <div class="clue-box">
+      <div class="clue-num">The Match</div>
+      ${match.home} vs ${match.away}<br>
+      <span style="color:var(--fg2);font-size:.82rem">${match.competition} · ${match.date} · ${match.venue}</span>
+    </div>
+    <div class="clue-box" id="s11-lineup-box">
+      <div class="clue-num">Lineup</div>
+      <div style="font-size:.82rem;line-height:1.6">${lineupDisplay}</div>
+    </div>
+    <div class="round-points" id="s11-pts">Worth up to 50 pts</div>
+    <div class="input-row" id="s11-input-row">
+      <input type="text" id="s11-guess" placeholder="Player name…" autocomplete="off"
+        onkeydown="if(event.key==='Enter')checkS11()">
+      <button class="btn btn-primary" onclick="checkS11()">Guess</button>
+    </div>
+    <div id="s11-feedback"></div>
+  `);
+  container.appendChild(c);
+
+  window.checkS11 = function() {
+    if (done) return;
+    const guess = document.getElementById("s11-guess").value.trim();
+    if (!guess) return;
+    if (checkAnswer(guess, hiddenName) || checkAnswer(guess, hiddenAnswer)) {
+      done = true;
+      const pts = pointsForGuess(wrong);
+      showRoundResult(c, pts, hiddenName, label);
+      finishRound(pts);
+    } else {
+      wrong++;
+      document.getElementById("s11-guess").value = "";
+      document.getElementById("s11-feedback").innerHTML =
+        `<div class="feedback wrong">${wrong} wrong guess${wrong>1?"es":""}</div>`;
+      document.getElementById("s11-pts").textContent =
+        `Worth up to ${Math.max(0,50-wrong*10)} pts`;
+      if (wrong >= 5) {
+        done = true;
+        document.getElementById("s11-input-row").innerHTML =
+          `<div class="feedback reveal">The answer was <strong>${hiddenName}</strong></div>`;
+        document.getElementById("s11-lineup-box").innerHTML =
+          `<div class="clue-num">Lineup</div><div style="font-size:.82rem;line-height:1.6">${hint}</div>`;
+        finishRound(0);
+      }
+    }
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Round 3 — Earworm
+// ---------------------------------------------------------------------------
+function renderEarworm(container, label, data) {
+  const display = data.display; // "Song — Artist"
+  const parts = display.split(" — ");
+  const song = parts[0], artist = parts[1] || "";
+  let wrong = 0;
+  let done = false;
+
+  const c = card(`
+    <div class="round-label">${label}</div>
+    <div class="round-title">Name the song or artist</div>
+    <div class="audio-wrap">
+      ${data.preview_url
+        ? `<audio controls src="${data.preview_url}"></audio>`
+        : `<div class="feedback reveal">⚠ Audio unavailable today</div>`}
+      <div class="audio-hint">30-second preview</div>
+    </div>
+    <div class="round-points" id="ew-pts">Worth up to 50 pts</div>
+    <div class="input-row" id="ew-input-row">
+      <input type="text" id="ew-guess" placeholder="Song or artist…" autocomplete="off"
+        onkeydown="if(event.key==='Enter')checkEarworm()">
+      <button class="btn btn-primary" onclick="checkEarworm()">Guess</button>
+    </div>
+    <div id="ew-feedback"></div>
+  `);
+  container.appendChild(c);
+
+  window.checkEarworm = function() {
+    if (done) return;
+    const guess = document.getElementById("ew-guess").value.trim();
+    if (!guess) return;
+    const hit = checkAnswer(guess, song) || checkAnswer(guess, artist) ||
+                checkAnswer(guess, display);
+    if (hit) {
+      done = true;
+      const pts = pointsForGuess(wrong);
+      showRoundResult(c, pts, display, label);
+      finishRound(pts);
+    } else {
+      wrong++;
+      document.getElementById("ew-guess").value = "";
+      document.getElementById("ew-feedback").innerHTML =
+        `<div class="feedback wrong">${wrong} wrong guess${wrong>1?"es":""}</div>`;
+      document.getElementById("ew-pts").textContent =
+        `Worth up to ${Math.max(0,50-wrong*10)} pts`;
+      if (wrong >= 5) {
+        done = true;
+        document.getElementById("ew-input-row").innerHTML =
+          `<div class="feedback reveal">The answer was <strong>${display}</strong></div>`;
+        finishRound(0);
+      }
+    }
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Round 4 — Guess the Year
+// ---------------------------------------------------------------------------
+function renderGuessYear(container, label, data) {
+  const clues = data.clues || [];
+  let revealed = 1;
+  let wrong = 0;
+  let done = false;
+
+  function clueHtml() {
+    return clues.map((c2, i) =>
+      i < revealed
+        ? `<div class="clue-box"><div class="clue-num">Clue ${i+1}</div>${c2}</div>`
+        : `<div class="clue-box locked"><div class="clue-num">Clue ${i+1}</div>${c2}</div>`
+    ).join("");
+  }
+
+  const c = card(`
+    <div class="round-label">${label}</div>
+    <div class="round-title">What year did these events happen?</div>
+    <div id="gty-clues">${clueHtml()}</div>
+    <div class="round-points" id="gty-pts">Worth up to 50 pts</div>
+    <div class="input-row" id="gty-input-row">
+      <input type="number" id="gty-guess" placeholder="e.g. 2003" min="1950" max="2025"
+        onkeydown="if(event.key==='Enter')checkYear()">
+      <button class="btn btn-primary" onclick="checkYear()">Guess</button>
+    </div>
+    <div id="gty-feedback"></div>
+  `);
+  container.appendChild(c);
+
+  window.checkYear = function() {
+    if (done) return;
+    const guess = parseInt(document.getElementById("gty-guess").value);
+    if (!guess) return;
+    if (guess === data.answer) {
+      done = true;
+      const pts = pointsForGuess(wrong);
+      showRoundResult(c, pts, String(data.answer), label);
+      finishRound(pts);
+    } else {
+      wrong++;
+      document.getElementById("gty-guess").value = "";
+      const diff = Math.abs(guess - data.answer);
+      document.getElementById("gty-feedback").innerHTML =
+        `<div class="feedback wrong">Not quite — you're ${diff} year${diff>1?"s":""} ${guess < data.answer ? "too early":"too late"}</div>`;
+      document.getElementById("gty-pts").textContent =
+        `Worth up to ${Math.max(0,50-wrong*10)} pts`;
+      if (revealed < clues.length) {
+        revealed++;
+        document.getElementById("gty-clues").innerHTML = clueHtml();
+      }
+      if (wrong >= 5) {
+        done = true;
+        document.getElementById("gty-input-row").innerHTML =
+          `<div class="feedback reveal">The answer was <strong>${data.answer}</strong></div>`;
+        revealed = clues.length;
+        document.getElementById("gty-clues").innerHTML = clueHtml();
+        finishRound(0);
+      }
+    }
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Round 5 — Pin the Pickle
+// ---------------------------------------------------------------------------
+function renderPinPickle(container, label, data) {
+  let marker = null;
+  let guessCount = 0;
+  let done = false;
+
+  const c = card(`
+    <div class="round-label">${label}</div>
+    <div class="round-title" style="margin-bottom:10px">${data.question}</div>
+    <div id="map"></div>
+    <div class="map-distance" id="map-dist">Click the map to place your pin</div>
+    <div class="input-row" style="margin-top:0" id="ptp-btn-row">
+      <button class="btn btn-primary" style="width:100%" id="ptp-submit-btn" onclick="submitPin()" disabled>
+        Submit Pin
+      </button>
+    </div>
+    <div id="ptp-feedback"></div>
+  `);
+  container.appendChild(c);
+
+  // Init map
+  const map = L.map("map").setView([20, 0], 2);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors", maxZoom: 10
+  }).addTo(map);
+
+  map.on("click", function(e) {
+    if (done) return;
+    if (marker) marker.remove();
+    marker = L.marker(e.latlng).addTo(map);
+    document.getElementById("ptp-submit-btn").disabled = false;
+    document.getElementById("map-dist").textContent =
+      `Pin placed at ${e.latlng.lat.toFixed(2)}°, ${e.latlng.lng.toFixed(2)}°`;
+  });
+
+  window.submitPin = function() {
+    if (!marker || done) return;
+    guessCount++;
+    const ll = marker.getLatLng();
+    const dist = haversineKm(ll.lat, ll.lng, data.lat, data.lng);
+    const pts = distanceToPoints(dist);
+    done = true;
+
+    // Show correct location
+    const correctMarker = L.marker([data.lat, data.lng], {
+      icon: L.divIcon({className:"", html:'<div style="background:var(--accent);width:14px;height:14px;border-radius:50%;border:2px solid #fff"></div>'})
+    }).addTo(map);
+    correctMarker.bindPopup(data.location_name).openPopup();
+    L.polyline([[ll.lat, ll.lng], [data.lat, data.lng]], {color:"#999",dashArray:"4"}).addTo(map);
+    map.fitBounds([[ll.lat, ll.lng], [data.lat, data.lng]], {padding:[30,30]});
+
+    document.getElementById("map-dist").textContent =
+      `${Math.round(dist).toLocaleString()} km away from ${data.location_name}`;
+    document.getElementById("ptp-btn-row").hidden = true;
+    document.getElementById("ptp-feedback").innerHTML =
+      `<div class="feedback ${pts > 0 ? "right":"wrong"}">+${pts} pts (${Math.round(dist).toLocaleString()} km off)</div>`;
+
+    showRoundResult(c, pts, data.location_name, label);
+    finishRound(pts);
+  };
+}
+
+function haversineKm(lat1, lon1, lat2, lon2) {
+  const R = 6371, dLat = rad(lat2-lat1), dLon = rad(lon2-lon1);
+  const a = Math.sin(dLat/2)**2 + Math.cos(rad(lat1))*Math.cos(rad(lat2))*Math.sin(dLon/2)**2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+}
+function rad(d) { return d * Math.PI / 180; }
+function distanceToPoints(km) {
+  if (km < 100)  return 50;
+  if (km < 500)  return 40;
+  if (km < 1000) return 30;
+  if (km < 2000) return 20;
+  if (km < 4000) return 10;
+  return 0;
+}
+
+// ---------------------------------------------------------------------------
+// Round 6 — Filmography
+// ---------------------------------------------------------------------------
+function renderFilmography(container, label, data) {
+  const films = data.films || [];
+  let revealed = 1;
+  let wrong = 0;
+  let done = false;
+
+  function listHtml() {
+    return films.map((f, i) =>
+      `<li class="${i < revealed ? "" : "locked"}">${f}</li>`
+    ).join("");
+  }
+
+  const c = card(`
+    <div class="round-label">${label}</div>
+    <div class="round-title">Which actor appeared in all these films?</div>
+    <ul class="films-list" id="films-list">${listHtml()}</ul>
+    <div class="round-points" id="film-pts">Worth up to 50 pts</div>
+    <div class="input-row" id="film-input-row">
+      <input type="text" id="film-guess" placeholder="Actor name…" autocomplete="off"
+        onkeydown="if(event.key==='Enter')checkFilm()">
+      <button class="btn btn-primary" onclick="checkFilm()">Guess</button>
+    </div>
+    <div id="film-feedback"></div>
+  `);
+  container.appendChild(c);
+
+  window.checkFilm = function() {
+    if (done) return;
+    const guess = document.getElementById("film-guess").value.trim();
+    if (!guess) return;
+    if (checkAnswer(guess, data.display) || checkAnswer(guess, data.answer)) {
+      done = true;
+      const pts = pointsForGuess(wrong);
+      showRoundResult(c, pts, data.display, label);
+      finishRound(pts);
+    } else {
+      wrong++;
+      document.getElementById("film-guess").value = "";
+      document.getElementById("film-feedback").innerHTML =
+        `<div class="feedback wrong">${wrong} wrong guess${wrong>1?"es":""}</div>`;
+      document.getElementById("film-pts").textContent =
+        `Worth up to ${Math.max(0,50-wrong*10)} pts`;
+      if (revealed < films.length) {
+        revealed++;
+        document.getElementById("films-list").innerHTML = listHtml();
+      }
+      if (wrong >= 5) {
+        done = true;
+        document.getElementById("film-input-row").innerHTML =
+          `<div class="feedback reveal">The answer was <strong>${data.display}</strong></div>`;
+        revealed = films.length;
+        document.getElementById("films-list").innerHTML = listHtml();
+        finishRound(0);
+      }
+    }
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Round result overlay
+// ---------------------------------------------------------------------------
+function showRoundResult(cardEl, pts, answer, roundName) {
+  const existing = cardEl.querySelector(".round-done");
+  if (existing) existing.remove();
+  const div = document.createElement("div");
+  div.className = "round-done";
+  div.innerHTML = `
+    <div class="points-earned">+${pts}</div>
+    <div class="points-label">points earned</div>
+    ${pts === 50 ? '<div style="font-size:.85rem;color:var(--accent);margin-top:4px">Perfect! 🎯</div>' : ""}
+  `;
+  cardEl.appendChild(div);
+}
+
+// ---------------------------------------------------------------------------
+// Final screen
+// ---------------------------------------------------------------------------
+function showFinal() {
+  document.getElementById("game").hidden = true;
+  const fs = document.getElementById("final-screen");
+  fs.hidden = false;
+  document.getElementById("final-score-num").textContent = totalScore;
+
+  const pct = totalScore / 300;
+  let msg = pct === 1 ? "Perfect score! Absolutely elite 🏆"
+    : pct >= 0.8 ? "Brilliant game 🌟"
+    : pct >= 0.6 ? "Solid effort 👏"
+    : pct >= 0.4 ? "Not bad — there's room to grow 💪"
+    : "Better luck tomorrow!";
+  document.getElementById("final-msg").textContent = msg;
+
+  // Save to localStorage to prevent replay
+  const todayKey = `gherkin_played_${new Date().toISOString().slice(0,10)}`;
+  try { localStorage.setItem(todayKey, JSON.stringify({score: totalScore, day: DAY.day})); } catch {}
+}
+
+// ---------------------------------------------------------------------------
+// Leaderboard submit
+// ---------------------------------------------------------------------------
+function showLeaderboardSubmit() {
+  document.getElementById("submit-modal").hidden = false;
+}
+
+async function submitScore() {
+  const email = document.getElementById("submit-email").value.trim();
+  const name  = document.getElementById("submit-name").value.trim();
+  const errEl = document.getElementById("submit-error");
+
+  if (!email || !email.includes("@")) {
+    errEl.textContent = "Please enter a valid email."; errEl.hidden = false; return;
+  }
+  if (!name) {
+    errEl.textContent = "Please choose a display name."; errEl.hidden = false; return;
+  }
+
+  errEl.hidden = true;
+  document.getElementById("submit-loading").hidden = false;
+
+  try {
+    const r = await fetch(`${SUPABASE_URL}/rest/v1/leaderboard`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_ANON,
+        "Authorization": `Bearer ${SUPABASE_ANON}`,
+        "Prefer": "return=minimal"
+      },
+      body: JSON.stringify({
+        player_name: name,
+        score: totalScore,
+        day: DAY.day,
+        email_hash: await sha256(email.toLowerCase().trim())
+      })
+    });
+    if (!r.ok && r.status !== 409) throw new Error(await r.text());
+    submittedName = name;
+  } catch (e) {
+    console.warn("Score submit error:", e);
+  }
+
+  document.getElementById("submit-modal").hidden = true;
+  document.getElementById("submit-loading").hidden = true;
+  openLeaderboard();
+}
+
+function skipSubmit() {
+  document.getElementById("submit-modal").hidden = true;
+  openLeaderboard();
+}
+
+// ---------------------------------------------------------------------------
+// Leaderboard display
+// ---------------------------------------------------------------------------
+let lbData = {today: null, alltime: null};
+
+async function openLeaderboard() {
+  document.getElementById("lb-modal").hidden = false;
+  loadLeaderboard();
+}
+
+async function loadLeaderboard() {
+  document.getElementById("lb-content").innerHTML =
+    '<p style="color:var(--fg2);font-size:.85rem">Loading…</p>';
+
+  try {
+    if (lbViewAllTime) {
+      await loadAllTime();
+    } else {
+      await loadToday();
+    }
+  } catch (e) {
+    document.getElementById("lb-content").innerHTML =
+      `<p style="color:var(--fg2);font-size:.85rem">Couldn't load leaderboard.</p>`;
+  }
+}
+
+async function loadToday() {
+  document.getElementById("lb-title").textContent = "Today's Leaderboard";
+  if (!lbData.today) {
+    const r = await fetch(
+      `${SUPABASE_URL}/rest/v1/leaderboard?day=eq.${DAY.day}&order=score.desc&limit=20`,
+      { headers: {"apikey": SUPABASE_ANON, "Authorization": `Bearer ${SUPABASE_ANON}`} }
+    );
+    lbData.today = await r.json();
+  }
+  renderLbTable(lbData.today, "score");
+}
+
+async function loadAllTime() {
+  document.getElementById("lb-title").textContent = "All-time Leaderboard";
+  if (!lbData.alltime) {
+    const r = await fetch(
+      `${SUPABASE_URL}/rest/v1/rpc/alltime_leaderboard`,
+      { headers: {"apikey": SUPABASE_ANON, "Authorization": `Bearer ${SUPABASE_ANON}`} }
+    );
+    lbData.alltime = await r.json();
+  }
+  renderLbTable(lbData.alltime, "avg_score", true);
+}
+
+function renderLbTable(rows, scoreKey, showGames=false) {
+  if (!rows || !rows.length) {
+    document.getElementById("lb-content").innerHTML =
+      '<p style="color:var(--fg2);font-size:.85rem">No scores yet.</p>'; return;
+  }
+  const header = showGames
+    ? `<tr><th>#</th><th>Name</th><th>Avg</th><th>Games</th></tr>`
+    : `<tr><th>#</th><th>Name</th><th>Score</th></tr>`;
+  const bodyRows = rows.map((r, i) => {
+    const isMe = submittedName && r.player_name === submittedName;
+    const scoreVal = showGames
+      ? `<td>${Math.round(r.avg_score)}</td><td style="color:var(--fg2)">(${r.games_played})</td>`
+      : `<td>${r[scoreKey]}</td>`;
+    return `<tr class="${isMe?"me":""}">
+      <td class="lb-rank">${i+1}</td>
+      <td>${r.player_name}</td>
+      ${scoreVal}
+    </tr>`;
+  }).join("");
+  document.getElementById("lb-content").innerHTML =
+    `<table class="lb-table"><thead>${header}</thead><tbody>${bodyRows}</tbody></table>`;
+}
+
+function toggleLbView() {
+  lbViewAllTime = !lbViewAllTime;
+  document.querySelector("#lb-modal button.btn-secondary").textContent =
+    lbViewAllTime ? "Today" : "All-time";
+  loadLeaderboard();
+}
+
+function closeLb() {
+  document.getElementById("lb-modal").hidden = true;
+}
+
+function shareScore() {
+  const emojis = roundScores.map(s => s===50?"🟩":s>=30?"🟨":s>0?"🟧":"🟥").join("");
+  const text = `Daily Gherkin 🥒 Day ${DAY.day}\n${totalScore}/300\n${emojis}`;
+  try { navigator.clipboard.writeText(text); } catch {}
+  alert("Copied to clipboard!\n\n" + text);
+}
+
+// ---------------------------------------------------------------------------
+// Crypto helper
+// ---------------------------------------------------------------------------
+async function sha256(str) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+
+// ---------------------------------------------------------------------------
+// Boot
+// ---------------------------------------------------------------------------
+init();
+</script>
+</body>
+</html>
