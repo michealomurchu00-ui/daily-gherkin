@@ -722,29 +722,15 @@ function renderEarworm(container, label, data) {
   const CLIP_DURATIONS = [1,2,4,8,15,30];
   let clipIdx = 0;
   let clipSecs = CLIP_DURATIONS[0];
-  let audioEl = null;
   let clipTimer = null;
-
-  function playClip() {
-    if (!data.preview_url) return;
-    if (audioEl) { audioEl.pause(); }
-    if (clipTimer) clearTimeout(clipTimer);
-    audioEl = new Audio(data.preview_url);
-    audioEl.play().catch(() => {});
-    const btn = document.getElementById("ew-play-btn");
-    if (btn) btn.textContent = `⏹ Playing (${clipSecs}s)…`;
-    clipTimer = setTimeout(() => {
-      audioEl.pause();
-      if (btn) btn.textContent = `▶ Play clip (${clipSecs}s)`;
-    }, clipSecs * 1000);
-  }
 
   const c = card(`
     <div class="round-label">${label}</div>
     <div class="round-title">Name the song</div>
     <div class="audio-wrap">
       ${data.preview_url
-        ? `<button class="btn btn-secondary" id="ew-play-btn" onclick="ewPlay()" style="width:100%;margin-bottom:6px">▶ Play clip (1s)</button>`
+        ? `<audio id="ew-audio" src="${data.preview_url}" preload="auto" style="display:none"></audio>
+           <button class="btn btn-secondary" id="ew-play-btn" onclick="ewPlay()" style="width:100%;margin-bottom:6px">▶ Play clip (1s)</button>`
         : `<div class="feedback reveal">⚠ Audio unavailable today</div>`}
       <div class="audio-hint" id="ew-clip-hint">Each wrong guess unlocks a longer clip</div>
     </div>
@@ -762,7 +748,19 @@ function renderEarworm(container, label, data) {
   `);
   container.appendChild(c);
 
-  window.ewPlay = playClip;
+  window.ewPlay = function() {
+    const audio = document.getElementById("ew-audio");
+    if (!audio) return;
+    if (clipTimer) clearTimeout(clipTimer);
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+    const btn = document.getElementById("ew-play-btn");
+    if (btn) btn.textContent = `⏹ Playing (${clipSecs}s)…`;
+    clipTimer = setTimeout(() => {
+      audio.pause();
+      if (btn) btn.textContent = `▶ Play clip (${clipSecs}s)`;
+    }, clipSecs * 1000);
+  };
 
   function timeOut() {
     if (done) return;
@@ -783,7 +781,7 @@ function renderEarworm(container, label, data) {
     done = true;
     stopTimer();
     if (clipTimer) clearTimeout(clipTimer);
-    if (audioEl) audioEl.pause();
+    const _a = document.getElementById("ew-audio"); if (_a) _a.pause();
     if (pts === 0) {
       document.getElementById("ew-input-row").innerHTML =
         `<div class="feedback reveal">The answer was <strong>${song}</strong></div>`;
@@ -844,7 +842,7 @@ function renderGuessYear(container, label, data) {
     </div>
     <div class="round-points" id="gty-pts">Worth up to 50 pts</div>
     <div class="input-row" id="gty-input-row">
-      <input type="number" id="gty-guess" placeholder="e.g. 2003" min="1950" max="2025"
+      <input type="number" id="gty-guess" placeholder="Enter a year…" min="1950" max="2025"
         onkeydown="if(event.key==='Enter')checkYear()">
       <button class="btn btn-primary" onclick="checkYear()">Guess</button>
     </div>
