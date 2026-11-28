@@ -1,36 +1,42 @@
 {
-  "day": 3,
+  "day": 4,
   "used": {
     "career_path": [
       10,
       12,
-      5
+      5,
+      4
     ],
     "starting11": [
       12,
       3,
-      1
+      1,
+      6
     ],
     "earworm": [
       14,
       1,
-      8
+      8,
+      12
     ],
     "guess_the_year": [
       1,
       7,
-      8
+      8,
+      14
     ],
     "pin_the_pickle": [
       8,
       10,
-      13
+      13,
+      5
     ],
     "filmography": [
       12,
       13,
-      5
+      5,
+      9
     ],
-    "filmography_last_id": 5
+    "filmography_last_id": 9
   }
 }

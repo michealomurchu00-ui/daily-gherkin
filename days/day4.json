@@ -1,0 +1,93 @@
+{
+  "day": 4,
+  "date": "2026-11-28",
+  "career": {
+    "answer": "torres",
+    "display": "Fernando Torres",
+    "wikipedia_title": "Fernando Torres",
+    "clubs": [
+      {
+        "name": "Atlético Madrid",
+        "years": "2001–07",
+        "apps": 174,
+        "goals": 75
+      },
+      {
+        "name": "Liverpool",
+        "years": "2007–11",
+        "apps": 102,
+        "goals": 65
+      },
+      {
+        "name": "Chelsea",
+        "years": "2011–15",
+        "apps": 110,
+        "goals": 20
+      },
+      {
+        "name": "AC Milan",
+        "years": "2014–15",
+        "apps": 10,
+        "goals": 1
+      },
+      {
+        "name": "Atlético Madrid",
+        "years": "2015–17",
+        "apps": 43,
+        "goals": 15
+      },
+      {
+        "name": "Sagan Tosu",
+        "years": "2018",
+        "apps": 22,
+        "goals": 5
+      }
+    ]
+  },
+  "starting11": {
+    "answer": "gotze",
+    "display": "Mario Götze",
+    "match": {
+      "home": "Germany",
+      "away": "Argentina",
+      "competition": "FIFA World Cup Final",
+      "venue": "Estádio do Maracanã, Rio de Janeiro",
+      "date": "13 July 2014",
+      "wikipedia_title": "2014 FIFA World Cup Final"
+    },
+    "lineup_hint": "Germany: Neuer; Lahm, Boateng, Hummels, Höwedes; Schweinsteiger, Khedira; Müller, Kroos, Özil; Klose"
+  },
+  "earworm": {
+    "display": "Bittersweet Symphony — The Verve",
+    "preview_url": "days/earworm.mp3",
+    "deezer_id": 398570642
+  },
+  "guess_the_year": {
+    "answer": 2011,
+    "clues": [
+      "An earthquake and tsunami in Japan triggered the Fukushima nuclear disaster",
+      "Osama Bin Laden was shot dead in a compound in Abbottabad, Pakistan",
+      "Amy Winehouse died aged 27",
+      "Uprisings swept through the Arab world, toppling governments that had stood for decades",
+      "Barcelona became European champions for the fourth time in their history"
+    ]
+  },
+  "pin_the_pickle": {
+    "question": "Where the most notorious island prison in American history stood",
+    "location_name": "Alcatraz Island, San Francisco Bay, USA",
+    "lat": 37.8267,
+    "lng": -122.423
+  },
+  "filmography": {
+    "answer": "christian_bale",
+    "display": "Christian Bale",
+    "films": [
+      "Thor: Love and Thunder",
+      "The Big Short",
+      "Ford v Ferrari",
+      "The Fighter",
+      "American Psycho",
+      "The Dark Knight"
+    ]
+  }
+}
